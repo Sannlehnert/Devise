@@ -1,0 +1,256 @@
+/* Estilos base mejorados */
+#root {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de vortex sutil en el fondo */
+.vortex-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vmax;
+  height: 100vmax;
+  background: 
+    radial-gradient(circle at center, transparent 30%, var(--bg-primary) 70%),
+    conic-gradient(
+      from 0deg at 50% 50%,
+      var(--accent-primary) 0%,
+      transparent 10%,
+      transparent 20%,
+      var(--accent-secondary) 30%,
+      transparent 40%,
+      transparent 60%,
+      var(--accent-primary) 70%,
+      transparent 80%,
+      transparent 90%,
+      var(--accent-secondary) 100%
+    );
+  opacity: 0.03;
+  animation: rotate-slow 120s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Efectos de iluminación focal */
+.spotlight {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.1) 0%, transparent 25%);
+  z-index: 0;
+}
+
+/* Mejoras para cards y contenedores */
+.ultra-glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ultra-glass:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* Botones de ultra lujo */
+.btn-ultra {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 4px 16px rgba(124, 58, 237, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn-ultra::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn-ultra:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 8px 24px rgba(124, 58, 237, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-ultra:hover::before {
+  left: 100%;
+}
+
+.btn-ultra:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Efecto de borde luminoso */
+.glow-border {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+  border-radius: 18px;
+  z-index: -1;
+  animation: border-glow 3s linear infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes border-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Mejoras para formularios */
+.form-ultra {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.form-ultra:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), 0 0 20px rgba(124, 58, 237, 0.3);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* Efecto de revelado gradual */
+.reveal-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efecto de distorsión sutil en hover */
+.hover-distort {
+  transition: transform 0.5s ease;
+}
+
+.hover-distort:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) scale(1.02);
+}
+
+/* Mejoras para imágenes de perfil */
+.profile-image {
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+              linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)) border-box;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+  transition: all 0.4s ease;
+}
+
+.profile-image:hover {
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Efecto de escritura mecánica */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--accent-primary);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent-primary); }
+}
+
+/* Mejoras de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Utilidades responsivas */
+@media (max-width: 768px) {
+  .ultra-glass {
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn-ultra {
+    padding: 12px 20px;
+  }
+}
+
+/* Efecto de profundidad con múltiples sombras */
+.deep-shadow {
+  box-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.05),
+    0 2px 2px rgba(255, 255, 255, 0.05),
+    0 4px 4px rgba(255, 255, 255, 0.05),
+    0 8px 8px rgba(255, 255, 255, 0.05),
+    0 16px 16px rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Efecto de vidrio esmerilado */
+.frosted-glass {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
