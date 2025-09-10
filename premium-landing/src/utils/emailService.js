@@ -1,5 +1,3 @@
-// Integración con EmailJS (ejemplo)
-
 export const sendEmail = (formData) => {
   // En desarrollo, simula el envío
   if (process.env.NODE_ENV === 'development') {

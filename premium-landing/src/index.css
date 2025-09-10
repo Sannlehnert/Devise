@@ -30,17 +30,20 @@
 }
 
 :root {
-  --bg-primary: #0a0f1d;
-  --bg-secondary: #0f172a;
-  --accent-primary: #7c3aed;
-  --accent-secondary: #6366f1;
+  --bg-primary: #030631;
+  --bg-secondary: #0a0f1d;
+  --accent-primary: #1C045A;
+  --accent-secondary: #584485;
+  --accent-tertiary: #9AD4EA;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --glow-color: rgba(124, 58, 237, 0.5);
+  --glow-color: rgba(28, 4, 90, 0.5);
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html, body, #root {
@@ -66,14 +69,10 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.3;
 }
 
 .particle {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--accent-primary);
   border-radius: 50%;
   animation: float 15s linear infinite;
 }
@@ -84,10 +83,10 @@ body {
     opacity: 0;
   }
   10% {
-    opacity: 0.5;
+    opacity: 0.7;
   }
   90% {
-    opacity: 0.5;
+    opacity: 0.7;
   }
   100% {
     transform: translateY(-100px) rotate(360deg);
@@ -142,7 +141,7 @@ body {
 
 /* Efectos de gradiente mejorados */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -248,8 +247,9 @@ body {
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(3deg); }
+  66% { transform: translateY(5px) rotate(-3deg); }
 }
 
 /* Efecto de aparición gradual para elementos */
@@ -289,12 +289,13 @@ body {
 
 /* Mejoras para imágenes */
 .image-hover-effect {
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
 }
 
 .image-hover-effect:hover {
   transform: scale(1.02);
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 10px 25px rgba(28, 4, 90, 0.3);
+  filter: brightness(1.1);
 }
 
 /* Efecto de tipo de escritura */
@@ -313,13 +314,6 @@ body {
 @keyframes blink-caret {
   from, to { border-color: transparent; }
   50% { border-color: var(--accent-primary); }
-}
-
-/* Utilidades para modos de color */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
 }
 
 /* Mejoras de impresión */
@@ -372,216 +366,23 @@ body {
   }
 }
 
-/* Animación de flotación para partículas */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(-10px) translateX(5px);
-  }
-}
-
-/* Animación de pulso para elementos */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.05);
-  }
-}
-
-/* Efecto de conexión entre partículas */
-.particle-connection {
-  position: absolute;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #7c3aed, transparent);
-  transform-origin: 0 50%;
-  animation: connection-glow 3s ease-in-out infinite;
-}
-
-@keyframes connection-glow {
-  0%, 100% {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scaleX(1);
-  }
-}
-
-/* Efecto de texto neón */
-.neon-text {
-  color: #fff;
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 20px #7c3aed,
-    0 0 30px #7c3aed,
-    0 0 40px #7c3aed;
-  animation: neon-flicker 2s infinite alternate;
-}
-
-@keyframes neon-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow: 
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 20px #7c3aed,
-      0 0 30px #7c3aed,
-      0 0 40px #7c3aed;
-  }
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
-}
-
-/* Efecto de profundidad 3D */
-.depth-3d {
-  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-  transition: transform 0.5s ease;
-}
-
-.depth-3d:hover {
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px);
-}
-
-/* Efecto de desvanecimiento gradual al hacer scroll */
-.fade-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animaciones personalizadas */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(-10px) translateX(5px);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(124, 58, 237, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.8);
-  }
-}
-
-/* Efecto de texto neón */
-.neon-text {
-  color: #fff;
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 20px #7c3aed,
-    0 0 30px #7c3aed,
-    0 0 40px #7c3aed;
-  animation: neon-flicker 2s infinite alternate;
-}
-
-@keyframes neon-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow: 
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 20px #7c3aed,
-      0 0 30px #7c3aed,
-      0 0 40px #7c3aed;
-  }
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
-}
-
-/* Efectos de profundidad */
-.depth-3d {
-  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-  transition: transform 0.5s ease;
-}
-
-.depth-3d:hover {
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px);
-}
-
-/* Mejoras para móviles */
-@media (max-width: 768px) {
-  .hero-content {
-    padding-top: 100px;
-  }
-  
-  .three-js-container {
-    opacity: 0.2;
-  }
-}
-
-/* Transiciones suaves para todos los elementos */
-* {
-  transition: all 0.3s ease;
-}
-
-/* Efecto de fade in up para las secciones */
-.section-fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.section-fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Mejora del efecto de parallax */
-.parallax-element {
-  will-change: transform;
-}
-
-/* Ajustes para móviles */
-@media (max-width: 768px) {
-  .hero-content {
-    padding-top: 100px;
-    transform: none !important;
-  }
-  
-  .three-js-container {
-    opacity: 0.2;
-  }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Mejoras para la experiencia de video */
-video {
-  object-fit: cover;
+/* Mejoras específicas para el video */
+.video-container {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Mejoras para móviles */
@@ -594,51 +395,244 @@ video {
     font-size: 0.7rem;
     padding: 0.5rem 1rem;
   }
-}
 
-/* Mejoras de animación */
-@keyframes subtle-float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-5px) rotate(1deg);
-  }
-  66% {
-    transform: translateY(3px) rotate(-1deg);
+  .video-overlay button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }
 
-.float-animation {
-  animation: subtle-float 8s ease-in-out infinite;
+/* Efectos de carga suave */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* Efectos de transición suave */
-.smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Mejoras de accesibilidad */
-.focus-visible {
-  outline: 2px solid #7c3aed;
-  outline-offset: 2px;
+/* Mejoras de botones */
+.btn-ultimate {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 4px 16px rgba(28, 4, 90, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
-/* Mejoras para el modal de interacción */
-.interaction-modal {
+.btn-ultimate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn-ultimate:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 8px 24px rgba(28, 4, 90, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-ultimate:hover::before {
+  left: 100%;
+}
+
+.btn-ultimate:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Mejoras de tarjetas */
+.ultimate-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ultimate-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(28, 4, 90, 0.2);
+  border-color: rgba(28, 4, 90, 0.3);
+}
+
+/* Mejoras de formularios */
+.ultimate-input {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Optimizaciones para rendimiento */
-.will-change-transform {
-  will-change: transform;
+.ultimate-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(28, 4, 90, 0.2), 0 0 20px rgba(28, 4, 90, 0.3);
+  background: rgba(15, 23, 42, 0.8);
 }
 
-/* Mejoras para la tipografía en móviles */
-@media (max-width: 640px) {
-  .responsive-text {
-    font-size: 1.5rem;
-    line-height: 1.2;
+/* Efecto de revelado gradual */
+.reveal-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efecto de distorsión sutil en hover */
+.hover-distort {
+  transition: transform 0.5s ease;
+}
+
+.hover-distort:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) scale(1.02);
+}
+
+/* Mejoras para imágenes de perfil */
+.profile-image {
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+              linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)) border-box;
+  box-shadow: 0 0 20px rgba(28, 4, 90, 0.3);
+  transition: all 0.4s ease;
+}
+
+.profile-image:hover {
+  box-shadow: 0 0 30px rgba(28, 4, 90, 0.5);
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Efecto de escritura mecánica */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--accent-primary);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent-primary); }
+}
+
+/* Mejoras de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+}
+
+/* Utilidades responsivas */
+@media (max-width: 768px) {
+  .ultimate-card {
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn-ultimate {
+    padding: 12px 20px;
+  }
+}
+
+/* Efecto de profundidad con múltiples sombras */
+.deep-shadow {
+  box-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.05),
+    0 2px 2px rgba(255, 255, 255, 0.05),
+    0 4px 4px rgba(255, 255, 255, 0.05),
+    0 8px 8px rgba(255, 255, 255, 0.05),
+    0 16px 16px rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Efecto de vidrio esmerilado */
+.frosted-glass {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Nuevos efectos para Devise */
+.magnetic-effect {
+  transition: transform 0.3s ease;
+}
+
+.magnetic-effect:hover {
+  transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--scale, 1.05));
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px var(--accent-tertiary);
+  color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+  border-radius: 18px;
+  z-index: -1;
+  animation: border-glow 3s linear infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes border-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efectos de tilt en tarjetas */
+.tilt-effect {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.tilt-effect:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
 }

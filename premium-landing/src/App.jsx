@@ -8,39 +8,57 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import VideoTrailer from './components/VideoTrailer';
+import BackgroundMotivation from './components/BackgroundMotivation';
 import InspirationalMessages from './components/InspirationalMessages';
+import ScrollIndicator from './components/ScrollIndicator';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [showVideo, setShowVideo] = useState(true);
-  const [hasInteraction, setHasInteraction] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Para navegadores que bloquean autoplay, esperar interacción del usuario
-    const handleInteraction = () => {
-      setHasInteraction(true);
-    };
+    // Verificar si el usuario ya vio el video
+    const hasSeenVideo = localStorage.getItem('devise-video-seen');
+    
+    if (hasSeenVideo) {
+      setShowVideo(false);
+    }
 
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('touchstart', handleInteraction);
+    // Simular carga de recursos
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-    return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   const handleVideoEnd = () => {
+    localStorage.setItem('devise-video-seen', 'true');
     setShowVideo(false);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#030631]">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#9AD4EA]/30 border-t-[#9AD4EA] rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>Cargando experiencia Devise...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
+      <BackgroundMotivation />
+      <ScrollIndicator />
+      
       <AnimatePresence>
-        {showVideo && hasInteraction && <VideoTrailer onEnd={handleVideoEnd} />}
+        {showVideo && <VideoTrailer onEnd={handleVideoEnd} />}
       </AnimatePresence>
       
-      {(!showVideo || !hasInteraction) && (
+      {!showVideo && (
         <>
           <Navbar />
           <Hero />
@@ -52,27 +70,6 @@ function App() {
           <Footer />
           <InspirationalMessages />
         </>
-      )}
-
-      {/* Overlay para invitar a la interacción en móviles */}
-      {showVideo && !hasInteraction && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="text-center p-6 max-w-md mx-4 bg-[#0f172a] rounded-2xl border border-accent/30">
-            <h3 className="text-xl font-bold text-white mb-4" style={{ fontFamily: 'Akira Expanded' }}>
-              BIENVENIDO A DEVISE
-            </h3>
-            <p className="text-subtle mb-6" style={{ fontFamily: 'Aurora' }}>
-              Toca en cualquier lugar para comenzar la experiencia
-            </p>
-            <button 
-              onClick={() => setHasInteraction(true)}
-              className="px-6 py-3 bg-accent text-white rounded-lg font-semibold"
-              style={{ fontFamily: 'Akira Expanded' }}
-            >
-              INICIAR EXPERIENCIA
-            </button>
-          </div>
-        </div>
       )}
     </div>
   );
