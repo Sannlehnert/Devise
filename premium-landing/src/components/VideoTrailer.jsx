@@ -5,35 +5,42 @@ export default function VideoTrailer({ onEnd }) {
   const videoRef = useRef(null);
   const [showPlayButton, setShowPlayButton] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleCanPlay = () => {
-      // Solo intentar reproducción automática en escritorio
-      if (window.innerWidth > 768) {
-        const playPromise = video.play();
-        
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setShowPlayButton(false);
-              setIsPlaying(true);
-            })
-            .catch(error => {
-              console.log("Autoplay prevented:", error);
-              setShowPlayButton(true);
-            });
-        }
-      } else {
-        // En móviles, siempre mostrar botón de play
-        setShowPlayButton(true);
+      console.log("Video puede reproducirse");
+
+      // Intentar reproducción automática en todos los dispositivos
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log("Reproducción automática exitosa");
+            setShowPlayButton(false);
+            setIsPlaying(true);
+          })
+          .catch(error => {
+            console.log("Autoplay prevenido:", error);
+            setShowPlayButton(true);
+          });
       }
+    };
+
+    const handleError = () => {
+      console.error("Error al cargar el video");
+      setVideoError(true);
+      // Si hay error, saltar directamente al contenido después de un breve tiempo
+      setTimeout(() => onEnd(), 1500);
     };
 
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('ended', onEnd);
+    video.addEventListener('error', handleError);
 
     // Forzar la carga del video
     video.load();
@@ -41,6 +48,7 @@ export default function VideoTrailer({ onEnd }) {
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('ended', onEnd);
+      video.removeEventListener('error', handleError);
     };
   }, [onEnd]);
 
@@ -67,6 +75,18 @@ export default function VideoTrailer({ onEnd }) {
     onEnd();
   };
 
+  // Si el video tarda más de 8 segundos en cargar, saltar al contenido
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!isPlaying) {
+        console.log("Tiempo de carga excedido, saltando...");
+        onEnd();
+      }
+    }, 8000);
+
+    return () => clearTimeout(timeout);
+  }, [isPlaying, onEnd]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -79,10 +99,9 @@ export default function VideoTrailer({ onEnd }) {
         ref={videoRef}
         className="w-full h-full object-cover"
         muted
+        autoPlay
         playsInline
         preload="auto"
-        loop={false}
-        poster="/videos/poster.jpg" // Añadir un poster por si el video tarda en cargar
       >
         <source src="/videos/trailer.mp4" type="video/mp4" />
         <source src="/videos/trailer.webm" type="video/webm" />
@@ -91,7 +110,7 @@ export default function VideoTrailer({ onEnd }) {
 
       {/* Overlay para botones */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center">
-        {showPlayButton && !isPlaying && (
+        {showPlayButton && !isPlaying && !videoError && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -105,6 +124,22 @@ export default function VideoTrailer({ onEnd }) {
             </svg>
             REPRODUCIR INTRO
           </motion.button>
+        )}
+
+        {videoError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute text-center text-white p-6 bg-black/50 rounded-lg"
+          >
+            <p className="mb-4">No se pudo cargar el video introductorio</p>
+            <button
+              onClick={onEnd}
+              className="px-6 py-2 bg-[#1C045A] rounded-full hover:bg-[#584485] transition-colors"
+            >
+              Continuar al sitio
+            </button>
+          </motion.div>
         )}
 
         <motion.button

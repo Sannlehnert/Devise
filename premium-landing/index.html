@@ -7,30 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Devise</title>
   <link rel="icon" href="/img/icono devise.png" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+  <!-- Precarga de fuentes -->
+  <link rel="preload" href="/fonts/AkiraExpanded-SuperBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Constantine.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/AuroraRegular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Precarga de video -->
+  <link rel="preload" href="/videos/trailer.mp4" as="video" type="video/mp4">
+
+  <!-- Estilos críticos inline -->
   <style>
-    @font-face {
-      font-family: 'Akira Expanded';
-      src: url('/fonts/AkiraExpanded-SuperBold.woff2') format('woff2');
-      font-weight: bold;
-      font-style: normal;
+    /* Estilos críticos para evitar FOUC */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #030631;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
     }
 
-    @font-face {
-      font-family: 'Constantine';
-      src: url('/fonts/Constantine.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Aurora';
-      src: url('/fonts/AuroraRegular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
+    .loading-spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #030631;
+      z-index: 9999;
     }
   </style>
-
 
   <!-- SEO essentials -->
   <meta name="description"
@@ -39,11 +49,22 @@
   <meta property="og:description"
     content="Servicios profesionales de social media y marketing. Portfolio y contacto." />
   <meta property="og:type" content="website" />
-
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div class="loading-spinner">
+      <div class="text-center">
+        <div class="spinner"></div>
+        <p>Cargando experiencia Devise...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carga de fuentes de Google de forma asíncrona -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    media="print" onload="this.media='all'">
+
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

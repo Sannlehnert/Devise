@@ -16,11 +16,23 @@ import { AnimatePresence } from 'framer-motion';
 function App() {
   const [showVideo, setShowVideo] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detectar si es móvil
+    const checkMobile = () => window.innerWidth <= 768;
+    setIsMobile(checkMobile());
+    
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
     // Verificar si el usuario ya vio el video
     const hasSeenVideo = localStorage.getItem('devise-video-seen');
     
+    // En móviles, saltar el video por defecto para mejor rendimiento
     if (hasSeenVideo) {
       setShowVideo(false);
     }
@@ -28,9 +40,12 @@ function App() {
     // Simular carga de recursos
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1500);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const handleVideoEnd = () => {
@@ -61,7 +76,7 @@ function App() {
       {!showVideo && (
         <>
           <Navbar />
-          <Hero />
+          <Hero isMobile={isMobile} />
           <Services />
           <Portfolio />
           <Process />
