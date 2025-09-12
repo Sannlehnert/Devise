@@ -1,82 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Process from './components/Process';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import VideoTrailer from './components/VideoTrailer';
-import BackgroundMotivation from './components/BackgroundMotivation';
-import InspirationalMessages from './components/InspirationalMessages';
-import ScrollIndicator from './components/ScrollIndicator';
-import { AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import { AnimatePresence } from "framer-motion";
+import VideoTrailer from "./components/VideoTrailer"; // import directo para evitar race con lazy
 
-function App() {
+// Lazy load de demás componentes (opcional y recomendado)
+const Navbar = lazy(() => import("./components/Navbar"));
+const Hero = lazy(() => import("./components/Hero"));
+const Services = lazy(() => import("./components/Services"));
+const Portfolio = lazy(() => import("./components/Portfolio"));
+const Process = lazy(() => import("./components/Process"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+const BackgroundMotivation = lazy(() => import("./components/BackgroundMotivation"));
+const InspirationalMessages = lazy(() => import("./components/InspirationalMessages"));
+const ScrollIndicator = lazy(() => import("./components/ScrollIndicator"));
+
+function LoadingSpinner() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#030631]">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-[#9AD4EA]/30 border-t-[#9AD4EA] rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-[#94a3b8]">Cargando experiencia Devise...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
   const [showVideo, setShowVideo] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  const [componentsLoaded, setComponentsLoaded] = useState(false);
 
   useEffect(() => {
-    // Detectar si es móvil
-    const checkMobile = () => window.innerWidth <= 768;
-    setIsMobile(checkMobile());
-    
-    const handleResize = () => {
-      setIsMobile(checkMobile());
-    };
-    
-    window.addEventListener('resize', handleResize);
-    
-    // Verificar si el usuario ya vio el video
-    const hasSeenVideo = localStorage.getItem('devise-video-seen');
-    
-    // En móviles, saltar el video por defecto para mejor rendimiento
-    if (hasSeenVideo) {
+    // Permite forzar el trailer via ?forceTrailer=1 (útil para testing)
+    const urlParams = new URLSearchParams(window.location.search);
+    const force = urlParams.get("forceTrailer") === "1";
+
+    // En dev podés forzar cambiando devForce a true
+    const devForce = process.env.NODE_ENV === "development" && false;
+
+    const seen = localStorage.getItem("devise-video-seen");
+
+    if (force || devForce) {
+      console.log("[App] force showVideo:", { force, devForce });
+      setShowVideo(true);
+    } else if (seen === "true") {
       setShowVideo(false);
+    } else {
+      setShowVideo(true);
     }
 
-    // Simular carga de recursos
-    const timer = setTimeout(() => {
+    // simulacro de splash
+    const t = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+      // cargar componentes lazy después de pequeño delay
+      setTimeout(() => setComponentsLoaded(true), 150);
+    }, 700);
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => clearTimeout(t);
   }, []);
 
   const handleVideoEnd = () => {
-    localStorage.setItem('devise-video-seen', 'true');
+    try { localStorage.setItem("devise-video-seen", "true"); } catch (e) {}
     setShowVideo(false);
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#030631]">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#9AD4EA]/30 border-t-[#9AD4EA] rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>Cargando experiencia Devise...</p>
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="relative">
-      <BackgroundMotivation />
-      <ScrollIndicator />
-      
+    <div className="relative min-h-screen">
       <AnimatePresence>
         {showVideo && <VideoTrailer onEnd={handleVideoEnd} />}
       </AnimatePresence>
-      
+
       {!showVideo && (
-        <>
+        <Suspense fallback={<div className="h-2 bg-[#1C045A]" />}>
+          {componentsLoaded && <BackgroundMotivation />}
+          <ScrollIndicator />
           <Navbar />
-          <Hero isMobile={isMobile} />
+          <Hero />
           <Services />
           <Portfolio />
           <Process />
@@ -84,10 +86,9 @@ function App() {
           <Contact />
           <Footer />
           <InspirationalMessages />
-        </>
+        </Suspense>
       )}
     </div>
   );
 }
 
-export default App;

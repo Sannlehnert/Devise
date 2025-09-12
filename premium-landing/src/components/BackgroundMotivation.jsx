@@ -22,7 +22,7 @@ export default function BackgroundMotivation() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 opacity-20">
+    <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
       <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 rotate-12">
         <p className="text-2xl font-bold text-[#1C045A]" style={{ fontFamily: 'Akira Expanded', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>
           {motivationalQuotes[currentQuote]}
@@ -46,9 +46,9 @@ export default function BackgroundMotivation() {
             key={i}
             className="absolute rounded-full animate-float"
             style={{
-              width: Math.random() * 15 + 5 + 'px',
-              height: Math.random() * 15 + 5 + 'px',
-              background: `radial-gradient(circle, rgba(${i % 3 === 0 ? '28,4,90' : i % 3 === 1 ? '88,68,133' : '154,212,234'}, ${0.2 + Math.random() * 0.3}) 0%, transparent 70%)`,
+              width: Math.random() * 10 + 5 + 'px',
+              height: Math.random() * 10 + 5 + 'px',
+              background: `radial-gradient(circle, rgba(${i % 3 === 0 ? '28,4,90' : i % 3 === 1 ? '88,68,133' : '154,212,234'}, ${0.1 + Math.random() * 0.2}) 0%, transparent 70%)`,
               top: Math.random() * 100 + '%',
               left: Math.random() * 100 + '%',
               animationDelay: Math.random() * 15 + 's',

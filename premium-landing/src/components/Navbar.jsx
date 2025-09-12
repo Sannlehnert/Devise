@@ -34,7 +34,6 @@ export default function Navbar() {
             src="/img/devicesinfondo.png"
             alt="Devise"
             className="h-10 object-contain"
-            style={{ fontFamily: 'Akira Expanded' }}
           />
         </a>
 
@@ -44,11 +43,11 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className="text-subtle hover:text-white transition-colors relative group"
+              className="text-[#94a3b8] hover:text-white transition-colors relative group"
               style={{ fontFamily: 'Aurora' }}
             >
               {item.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9AD4EA] transition-all group-hover:w-full"></span>
             </a>
           ))}
         </div>
@@ -56,7 +55,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center">
           <a
             href="#contacto"
-            className="ml-6 px-5 py-2.5 bg-accent hover:bg-accent/90 rounded-lg font-semibold transition-colors"
+            className="ml-6 px-5 py-2.5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] rounded-lg font-semibold transition-colors text-white"
             style={{ fontFamily: 'Akira Expanded' }}
           >
             CONTACTAR
@@ -101,7 +100,7 @@ export default function Navbar() {
               ))}
               <motion.a
                 href="#contacto"
-                className="px-8 py-3 bg-accent rounded-lg font-semibold mt-8 text-lg"
+                className="px-8 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] rounded-lg font-semibold mt-8 text-lg text-white"
                 style={{ fontFamily: 'Akira Expanded' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

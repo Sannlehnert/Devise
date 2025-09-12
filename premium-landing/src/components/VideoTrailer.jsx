@@ -1,157 +1,180 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function VideoTrailer({ onEnd }) {
   const videoRef = useRef(null);
-  const [showPlayButton, setShowPlayButton] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    console.log("[VideoTrailer] mounted");
+    const v = videoRef.current;
+    if (!v) {
+      console.warn("[VideoTrailer] no videoRef");
+      return;
+    }
 
     const handleCanPlay = () => {
-      console.log("Video puede reproducirse");
+      console.log("[VideoTrailer] canplay fired, trying autoplay...");
+      setIsLoaded(true);
 
-      // Intentar reproducción automática en todos los dispositivos
-      const playPromise = video.play();
-
+      // Intentar autoplay
+      const playPromise = v.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log("Reproducción automática exitosa");
-            setShowPlayButton(false);
+            console.log("[VideoTrailer] autoplay succeeded");
             setIsPlaying(true);
+            setShowPlayButton(false);
           })
-          .catch(error => {
-            console.log("Autoplay prevenido:", error);
+          .catch((err) => {
+            console.warn("[VideoTrailer] autoplay prevented:", err);
             setShowPlayButton(true);
           });
       }
     };
 
-    const handleError = () => {
-      console.error("Error al cargar el video");
-      setVideoError(true);
-      // Si hay error, saltar directamente al contenido después de un breve tiempo
-      setTimeout(() => onEnd(), 1500);
+    const handleEnded = () => {
+      console.log("[VideoTrailer] ended -> onEnd");
+      setIsPlaying(false);
+      onEnd && onEnd();
     };
 
-    video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('ended', onEnd);
-    video.addEventListener('error', handleError);
+    const handleError = (e) => {
+      console.error("[VideoTrailer] error loading video", e);
+      setVideoError(true);
+      // fallback: saltar al sitio en breve
+      setTimeout(() => onEnd && onEnd(), 900);
+    };
 
-    // Forzar la carga del video
-    video.load();
+    v.addEventListener("canplay", handleCanPlay);
+    v.addEventListener("ended", handleEnded);
+    v.addEventListener("error", handleError);
+
+    // Forzar fetch del recurso
+    try { v.load(); } catch (e) { /* ignore */ }
+
+    // Si ya está listo (cache), invocar manualmente
+    if (v.readyState >= 3) handleCanPlay();
 
     return () => {
-      video.removeEventListener('canplay', handleCanPlay);
-      video.removeEventListener('ended', onEnd);
-      video.removeEventListener('error', handleError);
+      console.log("[VideoTrailer] unmount");
+      v.removeEventListener("canplay", handleCanPlay);
+      v.removeEventListener("ended", handleEnded);
+      v.removeEventListener("error", handleError);
     };
   }, [onEnd]);
 
-  const handlePlayClick = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.play()
-        .then(() => {
-          setShowPlayButton(false);
-          setIsPlaying(true);
-        })
-        .catch(error => {
-          console.error("Error al reproducir:", error);
-          // Si falla, saltar directamente al contenido
-          onEnd();
-        });
+  const handlePlayClick = async () => {
+    const v = videoRef.current;
+    if (!v) return;
+    try {
+      await v.play();
+      setIsPlaying(true);
+      setShowPlayButton(false);
+      console.log("[VideoTrailer] user play succeeded");
+    } catch (err) {
+      console.error("[VideoTrailer] user play failed", err);
+      onEnd && onEnd();
     }
   };
 
   const handleSkip = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    onEnd();
+    try { videoRef.current && videoRef.current.pause(); } catch (e) { }
+    console.log("[VideoTrailer] skip -> onEnd");
+    onEnd && onEnd();
   };
 
-  // Si el video tarda más de 8 segundos en cargar, saltar al contenido
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!isPlaying) {
-        console.log("Tiempo de carga excedido, saltando...");
-        onEnd();
-      }
-    }, 8000);
-
-    return () => clearTimeout(timeout);
-  }, [isPlaying, onEnd]);
+  // dev reset button only
+  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.45 }}
       className="fixed inset-0 z-50 bg-black flex items-center justify-center"
     >
       <video
+        id="devise-debug-video"
         ref={videoRef}
         className="w-full h-full object-cover"
-        muted
         autoPlay
+        muted
         playsInline
         preload="auto"
       >
         <source src="/videos/trailer.mp4" type="video/mp4" />
         <source src="/videos/trailer.webm" type="video/webm" />
-        Tu navegador no soporta el video.
+        Tu navegador no soporta video.
       </video>
 
-      {/* Overlay para botones */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center">
+      {/* Overlay (center + skip + fallback) */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {showPlayButton && !isPlaying && !videoError && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-            className="absolute bg-[#1C045A] text-white px-8 py-4 rounded-full hover:bg-[#584485] transition-all group flex items-center gap-2"
-            onClick={handlePlayClick}
-            style={{ fontFamily: 'Akira Expanded' }}
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            REPRODUCIR INTRO
-          </motion.button>
+          <div className="pointer-events-auto">
+            <motion.button
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              onClick={handlePlayClick}
+              className="bg-[#1C045A] text-white px-8 py-3 rounded-full flex items-center gap-3 shadow-lg hover:bg-[#4b3a9a]"
+              aria-label="Reproducir intro"
+              style={{ fontFamily: "Akira Expanded, Inter, sans-serif" }}
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <span className="font-semibold">REPRODUCIR INTRO</span>
+            </motion.button>
+          </div>
         )}
 
         {videoError && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute text-center text-white p-6 bg-black/50 rounded-lg"
-          >
-            <p className="mb-4">No se pudo cargar el video introductorio</p>
-            <button
-              onClick={onEnd}
-              className="px-6 py-2 bg-[#1C045A] rounded-full hover:bg-[#584485] transition-colors"
-            >
-              Continuar al sitio
-            </button>
-          </motion.div>
+          <div className="pointer-events-auto text-center bg-black/60 p-6 rounded-md">
+            <p className="text-white mb-3">No se pudo cargar el video.</p>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={handleSkip}
+                className="px-4 py-2 bg-[#1C045A] rounded text-white"
+              >
+                Continuar
+              </button>
+            </div>
+          </div>
         )}
 
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          onClick={handleSkip}
-          className="absolute bottom-10 right-10 bg-white/10 text-white px-6 py-2 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all border border-white/20"
-          style={{ fontFamily: 'Aurora' }}
-        >
-          Saltar intro
-        </motion.button>
+        {/* Skip - siempre accesible */}
+        <div className="absolute bottom-6 right-6 pointer-events-auto">
+          <button
+            onClick={handleSkip}
+            className="px-4 py-2 rounded-full bg-white/10 text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 transition"
+          >
+            Saltar intro
+          </button>
+        </div>
+
+        {/* Dev: reset localStorage quick button */}
+        {isDev && (
+          <div className="absolute bottom-6 left-6 pointer-events-auto">
+            <button
+              onClick={() => {
+                try {
+                  localStorage.removeItem("devise-video-seen");
+                  alert("devise-video-seen borrado. Refresca la página para ver el trailer otra vez.");
+                } catch (e) {
+                  console.error(e);
+                }
+              }}
+              className="px-3 py-1 rounded bg-white/10 text-white text-sm border border-white/10"
+            >
+              Reset trailer (dev)
+            </button>
+          </div>
+        )}
       </div>
     </motion.div>
   );

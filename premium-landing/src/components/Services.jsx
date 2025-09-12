@@ -36,7 +36,7 @@ export default function Services() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
             SERVICIOS PREMIUM
           </h2>
-          <p className="text-subtle max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
+          <p className="text-[#94a3b8] max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
             Soluciones completas para empresas y profesionales que buscan escalar su presencia online.
           </p>
         </motion.div>
@@ -49,7 +49,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-[#0f172a] p-6 rounded-xl border border-white/5 hover:border-accent/30 transition-all"
+              className="bg-[#0f172a] p-6 rounded-xl border border-white/5 hover:border-[#9AD4EA]/30 transition-all"
             >
               <div className="text-3xl mb-4">{service.icon}</div>
 
@@ -57,11 +57,11 @@ export default function Services() {
                 {service.title}
               </h3>
 
-              <p className="text-subtle text-sm mb-4" style={{ fontFamily: 'Aurora' }}>
+              <p className="text-[#94a3b8] text-sm mb-4" style={{ fontFamily: 'Aurora' }}>
                 {service.description}
               </p>
 
-              <div className="text-accent text-sm flex items-center" style={{ fontFamily: 'Aurora' }}>
+              <div className="text-[#9AD4EA] text-sm flex items-center" style={{ fontFamily: 'Aurora' }}>
                 Descubrir más →
               </div>
             </motion.div>
@@ -76,7 +76,7 @@ export default function Services() {
         >
           <a
             href="#contacto"
-            className="inline-block px-8 py-3 bg-accent hover:bg-accent/90 rounded-lg font-semibold transition-colors"
+            className="inline-block px-8 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] rounded-lg font-semibold transition-colors text-white"
             style={{ fontFamily: 'Akira Expanded' }}
           >
             EXPLORAR TODOS LOS SERVICIOS

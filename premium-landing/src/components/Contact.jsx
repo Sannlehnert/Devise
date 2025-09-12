@@ -54,7 +54,7 @@ export default function Contact() {
           <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'Akira Expanded' }}>
             LLEVEMOS TUS IDEAS AL SIGUIENTE NIVEL
           </h2>
-          <p className="text-subtle mt-4 max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
+          <p className="text-[#94a3b8] mt-4 max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
             Contanos sobre tu proyecto y creemos algo increíble juntos.
           </p>
         </motion.div>
@@ -69,7 +69,7 @@ export default function Contact() {
         >
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ fontFamily: 'Aurora' }}>
+              <label htmlFor="name" className="block text-sm font-medium mb-2 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
                 Nombre
               </label>
               <input
@@ -80,7 +80,7 @@ export default function Contact() {
                 onChange={handleChange}
                 className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
                   errors.name ? 'border-red-500' : 'border-white/10'
-                } focus:border-accent focus:ring-2 focus:ring-accent/20 transition-colors`}
+                } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
                 placeholder="Tu nombre completo"
                 style={{ fontFamily: 'Aurora' }}
               />
@@ -92,7 +92,7 @@ export default function Contact() {
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ fontFamily: 'Aurora' }}>
+              <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
                 Email
               </label>
               <input
@@ -103,7 +103,7 @@ export default function Contact() {
                 onChange={handleChange}
                 className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
                   errors.email ? 'border-red-500' : 'border-white/10'
-                } focus:border-accent focus:ring-2 focus:ring-accent/20 transition-colors`}
+                } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
                 placeholder="tu@email.com"
                 style={{ fontFamily: 'Aurora' }}
               />
@@ -116,7 +116,7 @@ export default function Contact() {
           </div>
           
           <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ fontFamily: 'Aurora' }}>
+            <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
               Mensaje
             </label>
             <textarea
@@ -127,7 +127,7 @@ export default function Contact() {
               onChange={handleChange}
               className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
                 errors.message ? 'border-red-500' : 'border-white/10'
-              } focus:border-accent focus:ring-2 focus:ring-accent/20 transition-colors`}
+              } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
               placeholder="Contanos sobre tu proyecto, objetivos y visión..."
               style={{ fontFamily: 'Aurora' }}
             ></textarea>
@@ -142,7 +142,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="px-6 py-3 bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ fontFamily: 'Akira Expanded' }}
             >
               {status === 'sending' ? (
@@ -155,7 +155,7 @@ export default function Contact() {
               )}
             </button>
             
-            <div className="text-sm text-subtle flex items-center" style={{ fontFamily: 'Aurora' }}>
+            <div className="text-sm text-[#94a3b8] flex items-center" style={{ fontFamily: 'Aurora' }}>
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h1V3a1 1 0 011-1zm11 15a1 1 0 001-1V6a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h11z" clipRule="evenodd" />
               </svg>

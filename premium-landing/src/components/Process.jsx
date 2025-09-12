@@ -36,7 +36,7 @@ export default function Process() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
             NUESTRO PROCESO
           </h2>
-          <p className="text-subtle max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
+          <p className="text-[#94a3b8] max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
             Simple, probado y enfocado en resultados. Así llevamos cada proyecto al éxito.
           </p>
         </motion.div>
@@ -50,7 +50,7 @@ export default function Process() {
               transition={{ duration: 0.7, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#1C045A] to-[#584485] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-white font-bold text-xl" style={{ fontFamily: 'Akira Expanded' }}>
                   {step.number}
                 </span>
@@ -60,14 +60,14 @@ export default function Process() {
                 {step.title}
               </h3>
 
-              <p className="text-subtle text-sm" style={{ fontFamily: 'Aurora' }}>
+              <p className="text-[#94a3b8] text-sm" style={{ fontFamily: 'Aurora' }}>
                 {step.description}
               </p>
 
               <div className="mt-6">
-                <div className="w-12 h-0.5 bg-accent mx-auto"></div>
+                <div className="w-12 h-0.5 bg-[#9AD4EA] mx-auto"></div>
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 left-1/2 w-full h-0.5 bg-accent/20 transform -translate-y-1/2"></div>
+                  <div className="hidden lg:block absolute top-1/2 left-1/2 w-full h-0.5 bg-[#9AD4EA]/20 transform -translate-y-1/2"></div>
                 )}
               </div>
             </motion.div>

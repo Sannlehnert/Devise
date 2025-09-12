@@ -68,7 +68,7 @@ export default function Portfolio() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
             PROYECTOS DESTACADOS
           </h2>
-          <p className="text-subtle max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
+          <p className="text-[#94a3b8] max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
             Descubrí cómo llevamos ideas al siguiente nivel con creatividad y estrategia.
           </p>
         </motion.div>
@@ -86,8 +86,8 @@ export default function Portfolio() {
               key={category}
               onClick={() => setFilter(category)}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${filter === category
-                ? 'bg-accent text-white'
-                : 'bg-white/5 text-subtle hover:text-white'
+                ? 'bg-gradient-to-r from-[#1C045A] to-[#584485] text-white'
+                : 'bg-white/5 text-[#94a3b8] hover:text-white'
                 }`}
               style={{ fontFamily: 'Aurora' }}
             >
@@ -109,23 +109,23 @@ export default function Portfolio() {
               className="group cursor-pointer"
               onClick={() => setActive(project.id)}
             >
-              <div className="bg-[#0f172a] rounded-xl overflow-hidden border border-white/5 transition-all group-hover:border-accent/30">
-                <div className="h-48 bg-gradient-to-r from-accent/20 to-purple-500/10 flex items-center justify-center">
+              <div className="bg-[#0f172a] rounded-xl overflow-hidden border border-white/5 transition-all group-hover:border-[#9AD4EA]/30">
+                <div className="h-48 bg-gradient-to-r from-[#1C045A]/20 to-[#584485]/10 flex items-center justify-center">
                   <div className="text-2xl" style={{ fontFamily: 'Constantine' }}>
                     ΔE∨ASE
                   </div>
                 </div>
                 <div className="p-6">
-                  <span className="text-accent text-sm" style={{ fontFamily: 'Aurora' }}>
+                  <span className="text-[#9AD4EA] text-sm" style={{ fontFamily: 'Aurora' }}>
                     {project.category}
                   </span>
                   <h3 className="text-white text-lg font-semibold mt-2" style={{ fontFamily: 'Akira Expanded' }}>
                     {project.title}
                   </h3>
-                  <p className="text-subtle text-sm mt-2" style={{ fontFamily: 'Aurora' }}>
+                  <p className="text-[#94a3b8] text-sm mt-2" style={{ fontFamily: 'Aurora' }}>
                     {project.desc}
                   </p>
-                  <div className="mt-4 text-accent text-sm flex items-center" style={{ fontFamily: 'Aurora' }}>
+                  <div className="mt-4 text-[#9AD4EA] text-sm flex items-center" style={{ fontFamily: 'Aurora' }}>
                     Ver proyecto →
                   </div>
                 </div>
@@ -155,13 +155,13 @@ export default function Portfolio() {
                   <div key={project.id} className="p-8">
                     <button
                       onClick={() => setActive(null)}
-                      className="text-subtle hover:text-white mb-6"
+                      className="text-[#94a3b8] hover:text-white mb-6"
                       style={{ fontFamily: 'Aurora' }}
                     >
                       ← Volver
                     </button>
 
-                    <div className="h-64 bg-gradient-to-r from-accent/20 to-purple-500/10 rounded-lg mb-6 flex items-center justify-center">
+                    <div className="h-64 bg-gradient-to-r from-[#1C045A]/20 to-[#584485]/10 rounded-lg mb-6 flex items-center justify-center">
                       <div className="text-4xl" style={{ fontFamily: 'Constantine' }}>
                         ΔE∨ASE
                       </div>
@@ -172,7 +172,7 @@ export default function Portfolio() {
                         <h3 className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'Akira Expanded' }}>
                           {project.title}
                         </h3>
-                        <p className="text-subtle" style={{ fontFamily: 'Aurora' }}>
+                        <p className="text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
                           {project.desc} — Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                           Nullam auctor, nisl eu ultricies lacinia, nunc nisl aliquam nisl.
                         </p>
@@ -182,7 +182,7 @@ export default function Portfolio() {
                         <h4 className="text-white font-semibold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
                           Detalles del proyecto
                         </h4>
-                        <div className="space-y-3 text-subtle" style={{ fontFamily: 'Aurora' }}>
+                        <div className="space-y-3 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
                           <p><span className="text-white">Categoría:</span> {project.category}</p>
                           <p><span className="text-white">Cliente:</span> Cliente Premium</p>
                           <p><span className="text-white">Resultados:</span> +200% engagement</p>

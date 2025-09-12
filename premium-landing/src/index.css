@@ -725,3 +725,92 @@ img {
 img {
   content-visibility: auto;
 }
+
+/* Optimizaciones específicas para dispositivos móviles */
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .reduce-animations * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mejora de rendimiento para elementos con muchas animaciones */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Precarga de fuentes */
+body {
+  font-display: swap;
+}
+
+/* Optimización de imágenes */
+img {
+  content-visibility: auto;
+}
+
+/* Mejoras de rendimiento para dispositivos móviles */
+@media (max-width: 768px) {
+  .mobile-optimize {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Precarga de recursos críticos */
+.link-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Mejoras de rendimiento para animaciones */
+.will-change {
+  will-change: transform, opacity;
+}
+
+/* Optimización de fuentes */
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('/fonts/AkiraExpanded-SuperBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Constantine';
+  src: url('/fonts/Constantine.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aurora';
+  src: url('/fonts/AuroraRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Mejoras de rendimiento para imágenes */
+img {
+  content-visibility: auto;
+}

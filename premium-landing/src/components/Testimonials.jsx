@@ -34,7 +34,7 @@ export default function Testimonials() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
             CONFÍAN EN NOSOTROS
           </h2>
-          <p className="text-subtle max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
+          <p className="text-[#94a3b8] max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
             Descubrí lo que dicen nuestros clientes sobre la experiencia de trabajar con Devise.
           </p>
         </motion.div>
@@ -55,7 +55,7 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-subtle italic mb-6" style={{ fontFamily: 'Aurora' }}>
+              <p className="text-[#94a3b8] italic mb-6" style={{ fontFamily: 'Aurora' }}>
                 "{testimonial.text}"
               </p>
 
@@ -63,7 +63,7 @@ export default function Testimonials() {
                 <h4 className="text-white font-semibold" style={{ fontFamily: 'Akira Expanded' }}>
                   {testimonial.name}
                 </h4>
-                <p className="text-subtle text-sm" style={{ fontFamily: 'Aurora' }}>
+                <p className="text-[#94a3b8] text-sm" style={{ fontFamily: 'Aurora' }}>
                   {testimonial.company}
                 </p>
               </div>
@@ -79,7 +79,7 @@ export default function Testimonials() {
         >
           <a
             href="#contacto"
-            className="inline-block px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-white rounded-lg font-semibold transition-colors"
+            className="inline-block px-8 py-3 border border-[#9AD4EA] text-[#9AD4EA] hover:bg-[#9AD4EA] hover:text-white rounded-lg font-semibold transition-colors"
             style={{ fontFamily: 'Akira Expanded' }}
           >
             UNIRSE A CLIENTES SATISFECHOS
