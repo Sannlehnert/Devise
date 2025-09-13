@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { AnimatePresence } from "framer-motion";
-import VideoTrailer from "./components/VideoTrailer"; // import directo para evitar race con lazy
+import VideoTrailer from "./components/VideoTrailer";
 
-// Lazy load de demás componentes (opcional y recomendado)
+// Lazy load (mantengo tu estructura)
 const Navbar = lazy(() => import("./components/Navbar"));
 const Hero = lazy(() => import("./components/Hero"));
 const Services = lazy(() => import("./components/Services"));
@@ -27,41 +27,64 @@ function LoadingSpinner() {
 }
 
 export default function App() {
+  // Config: TTL en días — cambia si querés otro periodo
+  const TTL_DAYS = 30;
+  const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
+
   const [showVideo, setShowVideo] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [componentsLoaded, setComponentsLoaded] = useState(false);
 
   useEffect(() => {
-    // Permite forzar el trailer via ?forceTrailer=1 (útil para testing)
+    // Query param para forzar (útil en pruebas): ?forceTrailer=1
     const urlParams = new URLSearchParams(window.location.search);
     const force = urlParams.get("forceTrailer") === "1";
 
-    // En dev podés forzar cambiando devForce a true
+    // Forzar en dev (cambiar a true si querés verlo siempre en dev)
     const devForce = process.env.NODE_ENV === "development" && false;
 
-    const seen = localStorage.getItem("devise-video-seen");
-
-    if (force || devForce) {
-      console.log("[App] force showVideo:", { force, devForce });
-      setShowVideo(true);
-    } else if (seen === "true") {
-      setShowVideo(false);
-    } else {
-      setShowVideo(true);
+    // Leer timestamp guardado
+    const ts = localStorage.getItem("devise-video-seen-ts");
+    let seenTimestamp = null;
+    if (ts) {
+      const n = Number(ts);
+      if (!Number.isNaN(n)) seenTimestamp = n;
     }
 
-    // simulacro de splash
+    const now = Date.now();
+    const isExpired = !seenTimestamp || (now - seenTimestamp) > TTL_MS;
+
+    if (force || devForce) {
+      console.log("[App] Trailer forced (force/devForce):", { force, devForce });
+      setShowVideo(true);
+    } else if (isExpired) {
+      // si no hay timestamp o expiró, mostramos el trailer
+      console.log("[App] Trailer will show (not seen or expired).");
+      setShowVideo(true);
+    } else {
+      // ya lo vio y no expiró -> no lo mostramos
+      console.log("[App] Trailer skipped (recently seen).");
+      setShowVideo(false);
+    }
+
+    // Simular splash / cargar componentes lazy
     const t = setTimeout(() => {
       setIsLoading(false);
-      // cargar componentes lazy después de pequeño delay
       setTimeout(() => setComponentsLoaded(true), 150);
     }, 700);
 
     return () => clearTimeout(t);
   }, []);
 
-  const handleVideoEnd = () => {
-    try { localStorage.setItem("devise-video-seen", "true"); } catch (e) {}
+  // handleVideoEnd recibe un objeto: { skipped: boolean }
+  const handleVideoEnd = (info = { skipped: false }) => {
+    try {
+      // Guardamos timestamp para no repetir el trailer por TTL_MS
+      localStorage.setItem("devise-video-seen-ts", String(Date.now()));
+      console.log("[App] guardado timestamp (video visto). info:", info);
+    } catch (e) {
+      console.error("[App] error guardando timestamp", e);
+    }
     setShowVideo(false);
   };
 
@@ -91,4 +114,3 @@ export default function App() {
     </div>
   );
 }
-

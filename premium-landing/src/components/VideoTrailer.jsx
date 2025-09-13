@@ -6,7 +6,7 @@ export default function VideoTrailer({ onEnd }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isDev = process.env.NODE_ENV === "development";
 
   useEffect(() => {
     console.log("[VideoTrailer] mounted");
@@ -18,9 +18,6 @@ export default function VideoTrailer({ onEnd }) {
 
     const handleCanPlay = () => {
       console.log("[VideoTrailer] canplay fired, trying autoplay...");
-      setIsLoaded(true);
-
-      // Intentar autoplay
       const playPromise = v.play();
       if (playPromise !== undefined) {
         playPromise
@@ -37,26 +34,25 @@ export default function VideoTrailer({ onEnd }) {
     };
 
     const handleEnded = () => {
-      console.log("[VideoTrailer] ended -> onEnd");
+      console.log("[VideoTrailer] ended -> onEnd({skipped:false})");
       setIsPlaying(false);
-      onEnd && onEnd();
+      onEnd && onEnd({ skipped: false });
     };
 
     const handleError = (e) => {
       console.error("[VideoTrailer] error loading video", e);
       setVideoError(true);
-      // fallback: saltar al sitio en breve
-      setTimeout(() => onEnd && onEnd(), 900);
+      // fallback: saltar al sitio
+      setTimeout(() => onEnd && onEnd({ skipped: true }), 800);
     };
 
     v.addEventListener("canplay", handleCanPlay);
     v.addEventListener("ended", handleEnded);
     v.addEventListener("error", handleError);
 
-    // Forzar fetch del recurso
-    try { v.load(); } catch (e) { /* ignore */ }
+    // Forzar fetch
+    try { v.load(); } catch (e) {}
 
-    // Si ya está listo (cache), invocar manualmente
     if (v.readyState >= 3) handleCanPlay();
 
     return () => {
@@ -77,18 +73,15 @@ export default function VideoTrailer({ onEnd }) {
       console.log("[VideoTrailer] user play succeeded");
     } catch (err) {
       console.error("[VideoTrailer] user play failed", err);
-      onEnd && onEnd();
+      onEnd && onEnd({ skipped: true });
     }
   };
 
   const handleSkip = () => {
-    try { videoRef.current && videoRef.current.pause(); } catch (e) { }
-    console.log("[VideoTrailer] skip -> onEnd");
-    onEnd && onEnd();
+    try { videoRef.current && videoRef.current.pause(); } catch (e) {}
+    console.log("[VideoTrailer] skip -> onEnd({skipped:true})");
+    onEnd && onEnd({ skipped: true });
   };
-
-  // dev reset button only
-  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <motion.div
@@ -112,7 +105,6 @@ export default function VideoTrailer({ onEnd }) {
         Tu navegador no soporta video.
       </video>
 
-      {/* Overlay (center + skip + fallback) */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {showPlayButton && !isPlaying && !videoError && (
           <div className="pointer-events-auto">
@@ -122,8 +114,6 @@ export default function VideoTrailer({ onEnd }) {
               transition={{ type: "spring", stiffness: 200 }}
               onClick={handlePlayClick}
               className="bg-[#1C045A] text-white px-8 py-3 rounded-full flex items-center gap-3 shadow-lg hover:bg-[#4b3a9a]"
-              aria-label="Reproducir intro"
-              style={{ fontFamily: "Akira Expanded, Inter, sans-serif" }}
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
@@ -137,17 +127,11 @@ export default function VideoTrailer({ onEnd }) {
           <div className="pointer-events-auto text-center bg-black/60 p-6 rounded-md">
             <p className="text-white mb-3">No se pudo cargar el video.</p>
             <div className="flex gap-3 justify-center">
-              <button
-                onClick={handleSkip}
-                className="px-4 py-2 bg-[#1C045A] rounded text-white"
-              >
-                Continuar
-              </button>
+              <button onClick={() => onEnd && onEnd({ skipped: true })} className="px-4 py-2 bg-[#1C045A] rounded text-white">Continuar</button>
             </div>
           </div>
         )}
 
-        {/* Skip - siempre accesible */}
         <div className="absolute bottom-6 right-6 pointer-events-auto">
           <button
             onClick={handleSkip}
@@ -157,17 +141,14 @@ export default function VideoTrailer({ onEnd }) {
           </button>
         </div>
 
-        {/* Dev: reset localStorage quick button */}
         {isDev && (
           <div className="absolute bottom-6 left-6 pointer-events-auto">
             <button
               onClick={() => {
                 try {
-                  localStorage.removeItem("devise-video-seen");
-                  alert("devise-video-seen borrado. Refresca la página para ver el trailer otra vez.");
-                } catch (e) {
-                  console.error(e);
-                }
+                  localStorage.removeItem("devise-video-seen-ts");
+                  alert("devise-video-seen-ts borrado. Refresca la página para ver el trailer otra vez.");
+                } catch (e) { console.error(e); }
               }}
               className="px-3 py-1 rounded bg-white/10 text-white text-sm border border-white/10"
             >
