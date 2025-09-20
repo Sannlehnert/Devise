@@ -30,9 +30,9 @@ export default function Contact() {
       setErrors(formErrors);
       return;
     }
-    
+
     setStatus('sending');
-    
+
     // Simular envío (en producción integrar con EmailJS/Netlify Forms)
     setTimeout(() => {
       setStatus('success');
@@ -65,7 +65,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="grid gap-6 bg-[#0f172a]/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/5"
+          className="grid gap-6 minimal-card p-6 md:p-8"
         >
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -78,9 +78,7 @@ export default function Contact() {
                 type="text"
                 value={form.name}
                 onChange={handleChange}
-                className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
-                  errors.name ? 'border-red-500' : 'border-white/10'
-                } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
+                className="minimal-input w-full"
                 placeholder="Tu nombre completo"
                 style={{ fontFamily: 'Aurora' }}
               />
@@ -90,7 +88,7 @@ export default function Contact() {
                 </p>
               )}
             </div>
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
                 Email
@@ -101,9 +99,7 @@ export default function Contact() {
                 type="email"
                 value={form.email}
                 onChange={handleChange}
-                className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
-                  errors.email ? 'border-red-500' : 'border-white/10'
-                } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
+                className="minimal-input w-full"
                 placeholder="tu@email.com"
                 style={{ fontFamily: 'Aurora' }}
               />
@@ -114,7 +110,7 @@ export default function Contact() {
               )}
             </div>
           </div>
-          
+
           <div>
             <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
               Mensaje
@@ -125,9 +121,7 @@ export default function Contact() {
               rows="5"
               value={form.message}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg bg-[#0c1322] border ${
-                errors.message ? 'border-red-500' : 'border-white/10'
-              } focus:border-[#9AD4EA] focus:ring-2 focus:ring-[#9AD4EA]/20 transition-colors text-white`}
+              className="minimal-input w-full"
               placeholder="Contanos sobre tu proyecto, objetivos y visión..."
               style={{ fontFamily: 'Aurora' }}
             ></textarea>
@@ -137,12 +131,12 @@ export default function Contact() {
               </p>
             )}
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="px-6 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="minimal-button bg-gradient-to-r from-[#1C045A] to-[#584485] text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               style={{ fontFamily: 'Akira Expanded' }}
             >
               {status === 'sending' ? (
@@ -154,7 +148,7 @@ export default function Contact() {
                 'ENVIAR MENSAJE'
               )}
             </button>
-            
+
             <div className="text-sm text-[#94a3b8] flex items-center" style={{ fontFamily: 'Aurora' }}>
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h1V3a1 1 0 011-1zm11 15a1 1 0 001-1V6a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h11z" clipRule="evenodd" />
@@ -162,12 +156,12 @@ export default function Contact() {
               Respondemos en menos de 24h
             </div>
           </div>
-          
+
           {status === 'success' && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-4 bg-green-900/30 border border-green-500/30 rounded-lg text-green-300"
+              className="p-4 bg-green-900/20 border border-green-500/30 rounded-lg text-green-300"
               style={{ fontFamily: 'Aurora' }}
             >
               ✅ Mensaje enviado correctamente. Te contactaremos pronto.

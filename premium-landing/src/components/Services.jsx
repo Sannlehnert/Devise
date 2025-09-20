@@ -48,12 +48,11 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-[#0f172a] p-6 rounded-xl border border-white/5 hover:border-[#9AD4EA]/30 transition-all"
+              className="minimal-card hover-lift p-6 group"
             >
-              <div className="text-3xl mb-4">{service.icon}</div>
+              <div className="text-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
 
-              <h3 className="text-white text-lg font-semibold mb-3" style={{ fontFamily: 'Akira Expanded' }}>
+              <h3 className="text-white text-lg font-semibold mb-3 group-hover:text-[#9AD4EA] transition-colors" style={{ fontFamily: 'Akira Expanded' }}>
                 {service.title}
               </h3>
 
@@ -61,7 +60,7 @@ export default function Services() {
                 {service.description}
               </p>
 
-              <div className="text-[#9AD4EA] text-sm flex items-center" style={{ fontFamily: 'Aurora' }}>
+              <div className="text-[#9AD4EA] text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ fontFamily: 'Aurora' }}>
                 Descubrir más →
               </div>
             </motion.div>

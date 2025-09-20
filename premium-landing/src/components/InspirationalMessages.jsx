@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const messages = [
-  "~ CUANDO FALTE LA MOTIVACIÓN, LA DISCIPLINA SERÁ TU MAYOR ALIADA ~",
-  "~ LA RESILIENCIA DEFINE TU MARCA. TODOS JUNTOS AL SIGUIENTE NIVEL ~",
-  "~ CADA DÍA ES UNA OPORTUNIDAD PARA SER MEJOR ~",
-  "~ LA EVOLUCIÓN SE CONSIGUE HACIENDO AJUSTES, NO ACELERANDO LAS COSAS ~",
+  "~ Cuando falte la motivación, la disciplina será tu mayor aliada ~",
+  "~ La resilencia define tu marca. Todos juntos al siguiente nivel ~",
+  "~ Cada día es una oportunidad para ser mejor ~",
+  "~ La evolución se consigue haciendo ajustes, no acelerando las cosas ~",
   "~ Tu visión merece la mejor expresión visual ~",
   "~ Cada gran marca comenzó con una idea ~",
   "~ Juntos creamos lo extraordinario ~",

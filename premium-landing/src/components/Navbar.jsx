@@ -1,3 +1,4 @@
+// Navbar.jsx - Versión más minimalista
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -22,11 +23,14 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#0a0f1d]/90 backdrop-blur-sm py-3 shadow-lg' : 'bg-transparent py-5'
-        }`}
+      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-[#0a0f1d]/80 backdrop-blur-md py-3 border-b border-white/5' 
+          : 'bg-transparent py-5'
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a href="#" className="flex items-center">
@@ -47,7 +51,7 @@ export default function Navbar() {
               style={{ fontFamily: 'Aurora' }}
             >
               {item.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#9AD4EA] transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#9AD4EA] transition-all group-hover:w-full"></span>
             </a>
           ))}
         </div>
@@ -55,7 +59,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center">
           <a
             href="#contacto"
-            className="ml-6 px-5 py-2.5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] rounded-lg font-semibold transition-colors text-white"
+            className="minimal-button"
             style={{ fontFamily: 'Akira Expanded' }}
           >
             CONTACTAR
@@ -64,14 +68,14 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden flex flex-col gap-1.5 w-6 h-6 relative z-50"
+          className="md:hidden flex flex-col gap-1.5 w-6 h-6 relative z-50 group"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Menú mobile"
           aria-expanded={mobileMenuOpen}
         >
-          <span className={`w-full h-0.5 bg-white transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-          <span className={`w-full h-0.5 bg-white transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`w-full h-0.5 bg-white transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          <span className={`w-full h-0.5 bg-white transition-transform duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'group-hover:bg-[#9AD4EA]'}`}></span>
+          <span className={`w-full h-0.5 bg-white transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : 'group-hover:bg-[#9AD4EA]'}`}></span>
+          <span className={`w-full h-0.5 bg-white transition-transform duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'group-hover:bg-[#9AD4EA]'}`}></span>
         </button>
 
         {/* Mobile Menu */}
@@ -88,7 +92,7 @@ export default function Navbar() {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="text-white text-2xl"
+                  className="text-white text-2xl hover:text-[#9AD4EA] transition-colors"
                   style={{ fontFamily: 'Akira Expanded' }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -100,7 +104,7 @@ export default function Navbar() {
               ))}
               <motion.a
                 href="#contacto"
-                className="px-8 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] rounded-lg font-semibold mt-8 text-lg text-white"
+                className="minimal-button mt-8 text-lg"
                 style={{ fontFamily: 'Akira Expanded' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

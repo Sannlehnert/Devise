@@ -1,8 +1,8 @@
+// src/App.jsx
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { AnimatePresence } from "framer-motion";
 import VideoTrailer from "./components/VideoTrailer";
 
-// Lazy load (mantengo tu estructura)
 const Navbar = lazy(() => import("./components/Navbar"));
 const Hero = lazy(() => import("./components/Hero"));
 const Services = lazy(() => import("./components/Services"));
@@ -27,65 +27,70 @@ function LoadingSpinner() {
 }
 
 export default function App() {
-  // Config: TTL en días — cambia si querés otro periodo
+  // TTL para no mostrar el trailer constantemente (en ms)
   const TTL_DAYS = 30;
   const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
+  const STORAGE_KEY = "devise-video-seen-ts";
 
   const [showVideo, setShowVideo] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [componentsLoaded, setComponentsLoaded] = useState(false);
 
   useEffect(() => {
-    // Query param para forzar (útil en pruebas): ?forceTrailer=1
     const urlParams = new URLSearchParams(window.location.search);
     const force = urlParams.get("forceTrailer") === "1";
-
-    // Forzar en dev (cambiar a true si querés verlo siempre en dev)
     const devForce = process.env.NODE_ENV === "development" && false;
 
-    // Leer timestamp guardado
-    const ts = localStorage.getItem("devise-video-seen-ts");
-    let seenTimestamp = null;
-    if (ts) {
-      const n = Number(ts);
-      if (!Number.isNaN(n)) seenTimestamp = n;
+    // lee timestamp
+    let ts = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const n = Number(raw);
+      if (!Number.isNaN(n)) ts = n;
+    } catch (e) {
+      console.warn("No se pudo leer localStorage", e);
     }
 
     const now = Date.now();
-    const isExpired = !seenTimestamp || (now - seenTimestamp) > TTL_MS;
+    const expired = !ts || (now - ts) > TTL_MS;
 
     if (force || devForce) {
-      console.log("[App] Trailer forced (force/devForce):", { force, devForce });
+      console.log("[App] Trailer forzado por query/dev.");
       setShowVideo(true);
-    } else if (isExpired) {
-      // si no hay timestamp o expiró, mostramos el trailer
-      console.log("[App] Trailer will show (not seen or expired).");
+    } else if (expired) {
+      console.log("[App] Trailer se mostrará (no visto o expiró).");
       setShowVideo(true);
     } else {
-      // ya lo vio y no expiró -> no lo mostramos
-      console.log("[App] Trailer skipped (recently seen).");
+      console.log("[App] Trailer SKIP - reciente en localStorage.");
       setShowVideo(false);
     }
 
-    // Simular splash / cargar componentes lazy
+    // simulamos carga de recursos
     const t = setTimeout(() => {
       setIsLoading(false);
-      setTimeout(() => setComponentsLoaded(true), 150);
+      setTimeout(() => setComponentsLoaded(true), 120);
     }, 700);
-
     return () => clearTimeout(t);
   }, []);
 
-  // handleVideoEnd recibe un objeto: { skipped: boolean }
+  // cuando termina / salta -> guardamos timestamp
   const handleVideoEnd = (info = { skipped: false }) => {
     try {
-      // Guardamos timestamp para no repetir el trailer por TTL_MS
-      localStorage.setItem("devise-video-seen-ts", String(Date.now()));
-      console.log("[App] guardado timestamp (video visto). info:", info);
+      localStorage.setItem(STORAGE_KEY, String(Date.now()));
     } catch (e) {
-      console.error("[App] error guardando timestamp", e);
+      console.warn("No se pudo guardar timestamp", e);
     }
+    console.log("[App] onEnd recibida:", info);
     setShowVideo(false);
+  };
+
+  // botón público para reproducir otra vez el trailer (borra timestamp y muestra trailer)
+  const handleReplay = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+    // pequeña pausa para asegurar que state cambie
+    setTimeout(() => setShowVideo(true), 50);
   };
 
   if (isLoading) return <LoadingSpinner />;
@@ -99,6 +104,17 @@ export default function App() {
       {!showVideo && (
         <Suspense fallback={<div className="h-2 bg-[#1C045A]" />}>
           {componentsLoaded && <BackgroundMotivation />}
+
+          {/* Botón flotante para volver a ver intro */}
+          <button
+            onClick={handleReplay}
+            title="Ver intro"
+            className="fixed bottom-6 left-6 z-40 btn-ultra text-sm px-3 py-2"
+            style={{ boxShadow: "0 6px 18px rgba(28,4,90,0.25)" }}
+          >
+            Ver Intro
+          </button>
+
           <ScrollIndicator />
           <Navbar />
           <Hero />
