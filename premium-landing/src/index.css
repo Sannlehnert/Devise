@@ -207,3 +207,129 @@ body {
 .tracking-tight {
   letter-spacing: -0.02em;
 }
+
+/* Efectos 3D para la bandera */
+.flag-3d-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.flag-3d-wave {
+  animation: wave3d 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes wave3d {
+  0%, 100% { 
+    transform: 
+      perspective(1000px) 
+      rotateX(0deg) 
+      rotateY(0deg) 
+      rotateZ(0deg)
+      scale3d(1.1, 1.1, 1.1);
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+  25% { 
+    transform: 
+      perspective(1000px) 
+      rotateX(3deg) 
+      rotateY(2deg) 
+      rotateZ(0.5deg)
+      scale3d(1.12, 1.12, 1.12);
+    filter: brightness(1.1) contrast(1.05) hue-rotate(5deg);
+  }
+  50% { 
+    transform: 
+      perspective(1000px) 
+      rotateX(1deg) 
+      rotateY(4deg) 
+      rotateZ(-0.3deg)
+      scale3d(1.1, 1.1, 1.1);
+    filter: brightness(1.05) contrast(1.1) hue-rotate(-3deg);
+  }
+  75% { 
+    transform: 
+      perspective(1000px) 
+      rotateX(-2deg) 
+      rotateY(1deg) 
+      rotateZ(0.7deg)
+      scale3d(1.13, 1.13, 1.13);
+    filter: brightness(1.08) contrast(1.08) hue-rotate(7deg);
+  }
+}
+
+/* Sombras 3D dinámicas */
+.shadow-3d {
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Efectos de profundidad */
+.perspective-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Mejoras para el efecto de flameo */
+@keyframes flame-effect {
+  0%, 100% {
+    transform: 
+      perspective(1000px) 
+      rotateX(0deg) 
+      rotateY(0deg)
+      skew(0deg, 0deg)
+      scale(1);
+    filter: blur(0px);
+  }
+  25% {
+    transform: 
+      perspective(1000px) 
+      rotateX(2deg) 
+      rotateY(1deg)
+      skew(1deg, 0.5deg)
+      scale(1.02);
+    filter: blur(0.5px);
+  }
+  50% {
+    transform: 
+      perspective(1000px) 
+      rotateX(-1deg) 
+      rotateY(2deg)
+      skew(-0.5deg, 1deg)
+      scale(1.01);
+    filter: blur(0.3px);
+  }
+  75% {
+    transform: 
+      perspective(1000px) 
+      rotateX(1deg) 
+      rotateY(-1deg)
+      skew(0.7deg, -0.3deg)
+      scale(1.03);
+    filter: blur(0.7px);
+  }
+}
+
+.flag-3d-wave:hover {
+  animation: flame-effect 2s ease-in-out infinite;
+}
+
+/* Efectos de iluminación 3D */
+.light-effect-3d {
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: overlay;
+  animation: light-sweep 3s ease-in-out infinite;
+}
+
+@keyframes light-sweep {
+  0%, 100% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}

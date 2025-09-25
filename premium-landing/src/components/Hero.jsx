@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Flag3D from './Flag3D';
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -22,35 +23,12 @@ export default function Hero() {
 
   return (
     <header className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ paddingTop: '80px' }}>
-      {/* Bandera flameante de fondo con animación mejorada */}
+      {/* Bandera 3D Flameante de Fondo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div 
-          className="absolute inset-0 w-full h-full flag-flame"
-          style={{
-            backgroundImage: "url('/img/devisebandera.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.12,
-            transform: 'scale(1.1)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#030631]/95 via-[#0a0f1d]/90 to-[#030631]/95"></div>
-        
-        {/* Efecto de partículas sutil */}
-        <div className="absolute inset-0">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-[#9AD4EA] rounded-full animate-pulse"
-              style={{
-                top: `${20 + i * 10}%`,
-                left: `${10 + i * 12}%`,
-                animationDelay: `${i * 0.5}s`,
-                opacity: 0.4
-              }}
-            />
-          ))}
+        <div className="absolute inset-0 w-full h-full">
+          <Flag3D />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#030631]/95 via-[#0a0f1d]/90 to-[#030631]/95"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
@@ -62,14 +40,6 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="flex-1 text-center lg:text-left"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 1 }}
-              className="inline-block mb-6"
-            >
-            </motion.div>
-
             <motion.h1 
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6 tracking-tighter"
               style={{ fontFamily: 'Akira Expanded' }}
@@ -132,7 +102,6 @@ export default function Hero() {
                 </span>
               </a>
             </motion.div>
-
           </motion.div>
           
           {/* Video Rectangular Cinematográfico */}
@@ -163,9 +132,6 @@ export default function Hero() {
                     </div>
                   </div>
                 )}
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030631]/60 via-transparent to-transparent"></div>
-                
               </div>
               
               {/* Efecto de brillo perimetral */}

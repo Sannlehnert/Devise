@@ -6,13 +6,15 @@ const services = [
   {
     title: 'Branding & Identidad',
     description: 'Desarrollamos identidades visuales únicas que comunican la esencia de tu marca y conectan emocionalmente.',
-    icon: '🎨',
+    // Placeholder - será reemplazado por imagen diseñada
+    icon: '🎨', 
     link: 'contacto',
     color: 'from-[#1C045A] to-[#3A1C7A]'
   },
   {
     title: 'Social Media',
     description: 'Estrategias 360° que generan engagement real y convierten seguidores en clientes leales.',
+    // Placeholder - será reemplazado por imagen diseñada
     icon: '📱',
     link: 'portfolio',
     color: 'from-[#584485] to-[#7A5CA8]'
@@ -20,6 +22,7 @@ const services = [
   {
     title: 'Diseño Web',
     description: 'Experiencias digitales intuitivas y impactantes que convierten visitantes en leads.',
+    // Placeholder - será reemplazado por imagen diseñada
     icon: '💻',
     link: 'portfolio',
     color: 'from-[#9AD4EA] to-[#7AA8EE]'
@@ -27,6 +30,7 @@ const services = [
   {
     title: 'Motion Graphics',
     description: 'Animaciones que dan vida a tus ideas y capturan la atención en segundos.',
+    // Placeholder - será reemplazado por imagen diseñada
     icon: '🎬',
     link: 'portfolio',
     color: 'from-[#FF6B9D] to-[#FF8E53]'
@@ -76,9 +80,17 @@ export default function Services() {
                 
                 <div className="relative bg-[#0f172a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-[#0f172a]/80">
                   <div className="flex flex-col items-center text-center h-full">
-                    {/* Icono animado */}
+                    {/* Icono - Placeholder para imagen diseñada */}
                     <div className={`w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-2xl`}>
-                      <span className="text-3xl">{service.icon}</span>
+                      {/* Placeholder temporal - se reemplazará por imagen */}
+                      <div className="text-3xl">{service.icon}</div>
+                      
+                      {/* Comentario para cuando tengan las imágenes */}
+                      {/* <img 
+                        src={`/icons/${service.title.toLowerCase().replace(' ', '-')}.svg`}
+                        alt={service.title}
+                        className="w-10 h-10"
+                      /> */}
                     </div>
                     
                     <h3 className="text-white text-xl font-bold mb-4 leading-tight" style={{ fontFamily: 'Akira Expanded' }}>
