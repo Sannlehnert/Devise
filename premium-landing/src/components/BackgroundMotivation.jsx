@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const motivationalQuotes = [
-  "Cuando falte la motivación, la disciplina será tu mayor aliada",
-  "La resilencia define tu marca. Todos juntos al siguiente nivel",
-  "Cada día es una oportunidad para ser mejor. Juntos al siguiente nivel",
-  "La evolución se consigue haciendo ajustes, no acelerando las cosas",
-  "Tu visión merece la mejor expresión",
-  "Creamos experiencias que inspiran",
-  "El diseño es donde la ciencia y el arte se equilibran"
+
 ];
 
 export default function BackgroundMotivation() {
