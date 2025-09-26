@@ -333,3 +333,147 @@ body {
     transform: translateX(100%) rotate(45deg);
   }
 }
+
+/* Efectos específicos para el carrusel de proyectos */
+.carousel-container {
+  perspective: 1000px;
+}
+
+.carousel-slide {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Efectos de transición suave para el carrusel */
+.carousel-enter {
+  transform: translateX(100%) scale(0.9);
+  opacity: 0;
+}
+
+.carousel-enter-active {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-exit {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.carousel-exit-active {
+  transform: translateX(-100%) scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efectos de hover para las tarjetas de proyecto */
+.project-card-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(28, 4, 90, 0.1);
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-indicator.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.carousel-indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Controles de navegación */
+.carousel-control {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+/* Efectos de overlay para imágenes */
+.image-overlay {
+  background: linear-gradient(
+    45deg,
+    rgba(28, 4, 90, 0.1) 0%,
+    rgba(88, 68, 133, 0.1) 50%,
+    rgba(154, 212, 234, 0.1) 100%
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Animación sutil para el cambio de imágenes */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.carousel-image {
+  animation: subtle-pulse 4s ease-in-out infinite;
+}
+
+/* Efectos de profundidad para el modal */
+.modal-3d {
+  transform: translateZ(50px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsividad para el carrusel */
+@media (max-width: 768px) {
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-indicator {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .project-card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Efectos de brillo para las imágenes */
+.image-glow {
+  filter: brightness(1.05) contrast(1.1) saturate(1.1);
+  transition: filter 0.3s ease;
+}
+
+.image-glow:hover {
+  filter: brightness(1.1) contrast(1.2) saturate(1.2);
+}
+
+/* Transiciones suaves para todos los elementos del carrusel */
+.carousel-transition {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
