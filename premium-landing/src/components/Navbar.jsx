@@ -9,7 +9,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
+
       // Detectar sección activa
       const sections = ['home', 'servicios', 'portfolio', 'proceso', 'testimonios', 'contacto'];
       const current = sections.find(section => {
@@ -36,19 +36,18 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-[#0a0f1d]/95 backdrop-blur-xl py-3 border-b border-white/10' 
+      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${isScrolled
+          ? 'bg-[#0a0f1d]/95 backdrop-blur-xl py-3 border-b border-white/10'
           : 'bg-transparent py-6'
-      }`}
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <motion.a 
-          href="#" 
+        <motion.a
+          href="#"
           className="flex items-center group"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -66,18 +65,17 @@ export default function Navbar() {
             <motion.a
               key={item.name}
               href={item.href}
-              className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${
-                activeSection === item.id 
-                  ? 'text-[#9AD4EA] bg-white/5' 
+              className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${activeSection === item.id
+                  ? 'text-[#9AD4EA] bg-white/5'
                   : 'text-[#94a3b8] hover:text-white'
-              }`}
+                }`}
               style={{ fontFamily: 'Aurora' }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               {item.name}
               {activeSection === item.id && (
-                <motion.div 
+                <motion.div
                   className="absolute bottom-0 left-0 w-full h-0.5 bg-[#9AD4EA]"
                   layoutId="activeSection"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -108,15 +106,12 @@ export default function Navbar() {
           aria-expanded={mobileMenuOpen}
           whileTap={{ scale: 0.9 }}
         >
-          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? 'rotate-45 translate-y-2' : 'group-hover:bg-[#9AD4EA]'
-          }`}></span>
-          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? 'opacity-0' : 'group-hover:bg-[#9AD4EA]'
-          }`}></span>
-          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'group-hover:bg-[#9AD4EA]'
-          }`}></span>
+          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : 'group-hover:bg-[#9AD4EA]'
+            }`}></span>
+          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : 'group-hover:bg-[#9AD4EA]'
+            }`}></span>
+          <span className={`w-full h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : 'group-hover:bg-[#9AD4EA]'
+            }`}></span>
         </motion.button>
 
         {/* Mobile Menu */}
@@ -143,7 +138,7 @@ export default function Navbar() {
                   {item.name}
                 </motion.a>
               ))}
-              
+
               <motion.a
                 href="#contacto"
                 className="mt-8 px-8 py-4 bg-gradient-to-r from-[#1C045A] to-[#584485] text-white rounded-xl font-semibold"

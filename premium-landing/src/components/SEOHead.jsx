@@ -7,10 +7,10 @@ export default function SEOHead({
   url,
   type = 'website'
 }) {
-  const siteTitle = "Devise · Marketing & Diseño";
+  const siteTitle = "Devise";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const siteDescription = description || "Llevamos tus ideas al siguiente nivel con estrategias creativas y soluciones innovadoras de marketing y diseño.";
-  const siteUrl = url || "https://devise.com";
+  const siteUrl = url || "https://deviselatam.com.ar";
   const siteImage = image || "/og-image.jpg";
   return (
     <Helmet>

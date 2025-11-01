@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
 
-const projects = [
+const allProjects = [
   {
     id: 1,
     title: 'Campaña Branding',
@@ -10,7 +11,7 @@ const projects = [
     category: 'Branding',
     images: [
       '/projects/branding-1.jpg',
-      '/projects/branding-2.jpg', 
+      '/projects/branding-2.jpg',
       '/projects/branding-3.jpg',
       '/projects/branding-4.jpg'
     ],
@@ -79,6 +80,9 @@ const projects = [
   }
 ];
 
+// Solo mostrar 3 proyectos destacados
+const featuredProjects = allProjects.slice(0, 3);
+
 // Componente de Carrusel Individual para cada Proyecto
 function ProjectCarousel({ project, isActive, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -87,14 +91,14 @@ function ProjectCarousel({ project, isActive, onClose }) {
 
   const nextImage = () => {
     setDirection(1);
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === project.images.length - 1 ? 0 : prev + 1
     );
   };
 
   const prevImage = () => {
     setDirection(-1);
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === 0 ? project.images.length - 1 : prev - 1
     );
   };
@@ -102,7 +106,7 @@ function ProjectCarousel({ project, isActive, onClose }) {
   // Auto-advance carousel
   useEffect(() => {
     if (!isActive) return;
-    
+
     const interval = setInterval(() => {
       nextImage();
     }, 4000);
@@ -114,7 +118,7 @@ function ProjectCarousel({ project, isActive, onClose }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isActive) return;
-      
+
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
       if (e.key === 'Escape') onClose();
@@ -218,7 +222,7 @@ function ProjectCarousel({ project, isActive, onClose }) {
           >
             <span className="text-white text-2xl group-hover:scale-110 transition-transform">‹</span>
           </button>
-          
+
           <button
             onClick={nextImage}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm group"
@@ -235,11 +239,10 @@ function ProjectCarousel({ project, isActive, onClose }) {
                   setDirection(index > currentImageIndex ? 1 : -1);
                   setCurrentImageIndex(index);
                 }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex 
-                    ? 'bg-white scale-125' 
-                    : 'bg-white/50 hover:bg-white/70'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImageIndex
+                  ? 'bg-white scale-125'
+                  : 'bg-white/50 hover:bg-white/70'
+                  }`}
               />
             ))}
           </div>
@@ -284,7 +287,7 @@ function ProjectCard({ project, index, onOpen }) {
   // Auto-carrusel en hover
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPreviewIndex(prev => 
+      setCurrentPreviewIndex(prev =>
         prev === project.images.length - 1 ? 0 : prev + 1
       );
     }, 3000);
@@ -320,20 +323,19 @@ function ProjectCard({ project, index, onOpen }) {
               }}
             />
           </AnimatePresence>
-          
+
           {/* Overlay de Gradient */}
           <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}></div>
-          
+
           {/* Indicadores de Imágenes */}
           <div className="absolute bottom-3 left-3 flex space-x-1">
             {project.images.map((_, idx) => (
               <div
                 key={idx}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  idx === currentPreviewIndex 
-                    ? 'bg-white scale-125' 
-                    : 'bg-white/50'
-                }`}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentPreviewIndex
+                  ? 'bg-white scale-125'
+                  : 'bg-white/50'
+                  }`}
               />
             ))}
           </div>
@@ -368,7 +370,7 @@ function ProjectCard({ project, index, onOpen }) {
           <p className="text-[#94a3b8] text-sm leading-relaxed" style={{ fontFamily: 'Aurora' }}>
             {project.desc}
           </p>
-          
+
           {/* Footer de la Tarjeta */}
           <div className="mt-4 flex items-center justify-between">
             <div className="text-[#9AD4EA] text-sm flex items-center group-hover:translate-x-2 transition-transform duration-300" style={{ fontFamily: 'Aurora' }}>
@@ -396,15 +398,10 @@ function ProjectCard({ project, index, onOpen }) {
   );
 }
 
-// Componente Principal Portfolio
+// Componente Principal Portfolio - Solo Featured
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState(null);
   const [filter, setFilter] = useState('Todos');
-  const categories = ['Todos', ...new Set(projects.map(p => p.category))];
-
-  const filteredProjects = filter === 'Todos' 
-    ? projects
-    : projects.filter(p => p.category === filter);
 
   const openProject = (projectId) => {
     setActiveProject(projectId);
@@ -416,7 +413,7 @@ export default function Portfolio() {
     document.body.style.overflow = 'unset';
   };
 
-  const activeProjectData = projects.find(p => p.id === activeProject);
+  const activeProjectData = featuredProjects.find(p => p.id === activeProject);
 
   return (
     <section id="portfolio" className="py-28 relative overflow-hidden">
@@ -437,40 +434,14 @@ export default function Portfolio() {
             PROYECTOS DESTACADOS
           </h2>
           <p className="text-xl text-[#B8C2D9] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Aurora', fontWeight: 300 }}>
-            Descubrí cómo transformamos ideas en experiencias digitales extraordinarias. 
+            Una selección de nuestros trabajos más representativos.
             Cada proyecto cuenta una historia única de creatividad y estrategia.
           </p>
         </motion.div>
 
-        {/* Filtros */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setFilter(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 backdrop-blur-sm ${
-                filter === category
-                  ? 'bg-gradient-to-r from-[#1C045A] to-[#584485] text-white shadow-2xl'
-                  : 'bg-white/5 text-[#94a3b8] hover:text-white hover:bg-white/10'
-              }`}
-              style={{ fontFamily: 'Aurora' }}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Grid de Proyectos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+        {/* Grid de Proyectos Destacados */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {featuredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -480,25 +451,50 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Botón Ver Más Proyectos - Ultra Premium */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-16"
+          className="text-center"
         >
-          <div className="bg-gradient-to-r from-[#1C045A]/20 to-[#584485]/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Akira Expanded' }}>
-              ¿Listo para tu próximo proyecto?
-            </h3>
-            <p className="text-[#B8C2D9] mb-6 max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
-              Transformemos tu visión en una experiencia digital memorable.
-            </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
-              Iniciar Proyecto
-            </button>
-          </div>
+          <Link
+            to="/proyectos"
+            className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-2xl transition-all duration-500 hover:scale-105 shadow-2xl shadow-[#1C045A]/40 hover:shadow-[#584485]/50 overflow-hidden"
+            style={{ fontFamily: 'Akira Expanded', letterSpacing: '0.05em' }}
+          >
+            <span className="relative z-10 flex items-center justify-center">
+              EXPLORAR TODOS LOS PROYECTOS
+              <svg className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            {/* Efecto de partículas en hover */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-20"
+                  animate={{
+                    y: [0, -20, 0],
+                    x: [0, Math.sin(i) * 10, 0],
+                  }}
+                  transition={{
+                    duration: 2 + i * 0.5,
+                    repeat: Infinity,
+                    delay: i * 0.2
+                  }}
+                  style={{
+                    left: `${20 + i * 15}%`,
+                    bottom: '10%',
+                  }}
+                />
+              ))}
+            </div>
+          </Link>
         </motion.div>
       </div>
 

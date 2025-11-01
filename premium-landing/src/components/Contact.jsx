@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from 'emailjs-com';
+
+// ✅ Configuración CORRECTA de EmailJS
+const EMAILJS_CONFIG = {
+  SERVICE_ID: 'service_qix8jhb',
+  TEMPLATE_ID: 'template_lt3xuk4',
+  PUBLIC_KEY: 'QuKQ7miwt33lga1bh'
+};
+
+// Inicializar EmailJS
+emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -30,21 +41,38 @@ export default function Contact() {
       setErrors(formErrors);
       return;
     }
-    
+
     setStatus('sending');
-    
-    setTimeout(() => {
+
+    try {
+      // ✅ Envío REAL con EmailJS
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+          to_email: 'santiagolehnert2016@gmail.com', // Cambiar por el email del cliente
+          date: new Date().toLocaleString('es-AR')
+        }
+      );
+
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 1500);
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Error enviando email:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
     <section id="contacto" className="py-28 relative overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#030631]/50 via-[#0a0f1d]/30 to-[#1C045A]/20"></div>
-      
+
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -69,7 +97,7 @@ export default function Contact() {
           className="relative"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#1C045A] to-[#584485] rounded-3xl blur-xl opacity-10"></div>
-          
+
           <form
             onSubmit={handleSubmit}
             className="relative glass-effect rounded-3xl p-8 md:p-12 backdrop-blur-xl"
@@ -93,7 +121,7 @@ export default function Contact() {
                   placeholder="Tu nombre completo"
                 />
                 {errors.name && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-red-400 text-sm mt-2 flex items-center"
@@ -103,7 +131,7 @@ export default function Contact() {
                   </motion.p>
                 )}
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -122,7 +150,7 @@ export default function Contact() {
                   placeholder="tu@empresa.com"
                 />
                 {errors.email && (
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-red-400 text-sm mt-2 flex items-center"
@@ -133,7 +161,7 @@ export default function Contact() {
                 )}
               </motion.div>
             </div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -153,67 +181,80 @@ export default function Contact() {
                 placeholder="Describí tu visión, objetivos, timeline y cualquier detalle relevante..."
               ></textarea>
               {errors.message && (
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="text-red-400 text-sm mt-2 flex items-center"
                   style={{ fontFamily: 'Aurora' }}
-                >
-                  ⚠️ {errors.message}
-                </motion.p>
-              )}
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-between gap-6"
-            >
-              <motion.button
-                type="submit"
-                disabled={status === 'sending'}
-                className="btn-cosmic disabled:opacity-50 disabled:cursor-not-allowed min-w-[200px] group"
-                style={{ fontFamily: 'Akira Expanded' }}
-                whileHover={{ scale: status !== 'sending' ? 1.05 : 1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {status === 'sending' ? (
-                  <span className="flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
-                    ENVIANDO...
-                  </span>
-                ) : status === 'success' ? (
-                  '✅ ENVIADO'
-                ) : (
-                  <span className="flex items-center justify-center">
-                    ENVIAR MENSAJE
-                    <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </span>
+                  >
+                    ⚠️ {errors.message}
+                  </motion.p>
                 )}
-              </motion.button>
-              
-              <div className="text-sm text-[#94a3b8] flex items-center" style={{ fontFamily: 'Aurora' }}>
-                <div className="w-2 h-2 bg-[#9AD4EA] rounded-full mr-3 animate-pulse"></div>
-                Respuesta garantizada en menos de 24h
-              </div>
-            </motion.div>
-            
-            {status === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mt-6 p-4 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl text-green-300 text-center backdrop-blur-sm"
-                style={{ fontFamily: 'Aurora' }}
-              >
-                🎉 ¡Mensaje enviado correctamente! Te contactaremos dentro de las próximas 24 horas.
               </motion.div>
-            )}
-          </form>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-col sm:flex-row items-center justify-between gap-6"
+              >
+                <motion.button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="btn-cosmic disabled:opacity-50 disabled:cursor-not-allowed min-w-[200px] group"
+                  style={{ fontFamily: 'Akira Expanded' }}
+                  whileHover={{ scale: status !== 'sending' ? 1.05 : 1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {status === 'sending' ? (
+                    <span className="flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
+                      ENVIANDO...
+                    </span>
+                  ) : status === 'success' ? (
+                    '✅ ENVIADO'
+                  ) : status === 'error' ? (
+                    '❌ ERROR'
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      ENVIAR MENSAJE
+                      <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                  )}
+                </motion.button>
+
+                <div className="text-sm text-[#94a3b8] flex items-center" style={{ fontFamily: 'Aurora' }}>
+                  <div className="w-2 h-2 bg-[#9AD4EA] rounded-full mr-3 animate-pulse"></div>
+                  Respuesta garantizada en menos de 24h
+                </div>
+              </motion.div>
+
+              {status === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="mt-6 p-4 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl text-green-300 text-center backdrop-blur-sm"
+                  style={{ fontFamily: 'Aurora' }}
+                >
+                  🎉 ¡Mensaje enviado correctamente! Te contactaremos dentro de las próximas 24 horas.
+                </motion.div>
+              )}
+
+              {status === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="mt-6 p-4 bg-gradient-to-r from-red-900/20 to-pink-900/20 border border-red-500/30 rounded-xl text-red-300 text-center backdrop-blur-sm"
+                  style={{ fontFamily: 'Aurora' }}
+                >
+                  ❌ Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctanos directamente.
+                </motion.div>
+              )}
+            </form>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }

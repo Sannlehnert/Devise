@@ -8,7 +8,7 @@ const services = [
     description: 'Desarrollamos identidades visuales únicas que comunican la esencia de tu marca y conectan emocionalmente.',
     // Placeholder - será reemplazado por imagen diseñada
     icon: '🎨', 
-    link: 'contacto',
+    link: 'portfolio',
     color: 'from-[#1C045A] to-[#3A1C7A]'
   },
   {

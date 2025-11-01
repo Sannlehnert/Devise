@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/Navbar"));
@@ -16,6 +17,7 @@ const ScrollIndicator = lazy(() => import("./components/ScrollIndicator"));
 const InspirationalMessages = lazy(() => import("./components/InspirationalMessages"));
 const CustomCursor = lazy(() => import("./components/CustomCursor"));
 const SEOHead = lazy(() => import("./components/SEOHead"));
+const AllProjects = lazy(() => import("./components/AllProjects"));
 
 function LoadingSpinner() {
   return (
@@ -25,6 +27,27 @@ function LoadingSpinner() {
         <p className="text-[#B8C2D9] text-lg" style={{ fontFamily: 'Aurora' }}>Inicializando experiencia Devise...</p>
       </div>
     </div>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
+      <SEOHead />
+      <GalaxyBackground />
+      <CustomCursor />
+      <ScrollIndicator />
+      <Navbar />
+      <Hero />
+      <Services />
+      <Portfolio />
+      <BrandCarousel />
+      <Process />
+      <Testimonials />
+      <Contact />
+      <Footer />
+      <InspirationalMessages />
+    </>
   );
 }
 
@@ -43,24 +66,16 @@ export default function App() {
 
   return (
     <HelmetProvider>
-      <div className="relative min-h-screen cosmic-bg">
-        <Suspense fallback={<LoadingSpinner />}>
-          <SEOHead />
-          <GalaxyBackground />
-          <CustomCursor />
-          <ScrollIndicator />
-          <Navbar />
-          <Hero />
-          <Services />
-          <Portfolio />
-          <BrandCarousel />
-          <Process />
-          <Testimonials />
-          <Contact />
-          <Footer />
-          <InspirationalMessages />
-        </Suspense>
-      </div>
+      <Router>
+        <div className="relative min-h-screen cosmic-bg">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/proyectos" element={<AllProjects />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </Router>
     </HelmetProvider>
   );
 }
