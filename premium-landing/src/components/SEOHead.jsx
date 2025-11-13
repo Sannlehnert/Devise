@@ -7,7 +7,7 @@ export default function SEOHead({
   url,
   type = 'website'
 }) {
-  const siteTitle = "Devise";
+  const siteTitle = "Devise Latam";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const siteDescription = description || "Llevamos tus ideas al siguiente nivel con estrategias creativas y soluciones innovadoras de marketing y diseño.";
   const siteUrl = url || "https://deviselatam.com.ar";

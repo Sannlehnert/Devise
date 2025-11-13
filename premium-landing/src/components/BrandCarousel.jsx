@@ -35,7 +35,7 @@ export default function BrandCarousel() {
         </motion.div>
 
         <div className="relative overflow-hidden py-8">
-          <motion.div 
+          <motion.div
             className="flex space-x-12"
             animate={{
               x: [0, -1800],
@@ -50,21 +50,21 @@ export default function BrandCarousel() {
             }}
           >
             {[...brands, ...brands, ...brands].map((brand, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex-shrink-0 flex items-center justify-center group"
               >
                 <div className="w-32 h-16 bg-white/5 rounded-xl flex items-center justify-center p-4 backdrop-blur-sm border border-white/5 hover:border-[#9AD4EA]/20 transition-all duration-300 group-hover:scale-110">
-                  <img 
-                    src={brand.logo} 
-                    alt={brand.name} 
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
                     className="max-w-full max-h-8 filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 </div>
               </div>
             ))}
           </motion.div>
-          
+
           {/* Overlay de degradado en los bordes */}
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0f1d] to-transparent z-10"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0f1d] to-transparent z-10"></div>
