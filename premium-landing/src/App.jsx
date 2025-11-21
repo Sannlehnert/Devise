@@ -10,6 +10,7 @@ const Portfolio = lazy(() => import("./components/Portfolio"));
 const BrandCarousel = lazy(() => import("./components/BrandCarousel"));
 const Process = lazy(() => import("./components/Process"));
 const Testimonials = lazy(() => import("./components/Testimonials"));
+const FreeTemplates = lazy(() => import("./components/FreeTemplates"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 const GalaxyBackground = lazy(() => import("./components/GalaxyBackground"));
@@ -44,6 +45,7 @@ function HomePage() {
       <BrandCarousel />
       <Process />
       <Testimonials />
+      <FreeTemplates />
       <Contact />
       <Footer />
       <InspirationalMessages />

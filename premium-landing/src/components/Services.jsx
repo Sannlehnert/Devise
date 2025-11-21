@@ -128,7 +128,7 @@ export default function Services() {
           className="text-center mt-16"
         >
           <Link
-            to="contacto"
+            to="portfolio"
             smooth={true}
             duration={800}
             className="inline-flex items-center px-12 py-5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-2xl transition-all duration-500 hover:scale-105 shadow-2xl shadow-[#1C045A]/40 hover:shadow-[#584485]/50 group"
