@@ -5,6 +5,22 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true // Abre el navegador automáticamente
+    open: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          animation: ['framer-motion'],
+          utils: ['emailjs-com']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 600,
+    cssCodeSplit: true
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion']
   }
 })

@@ -478,3 +478,66 @@ body {
 .carousel-transition {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Mejoras de contraste y legibilidad */
+.text-\[\#94a3b8\] {
+  color: rgba(165, 180, 202, 0.95) !important;
+}
+
+.text-\[\#B8C2D9\] {
+  color: rgba(200, 210, 230, 0.98) !important;
+}
+
+/* Mejoras de animaciones */
+.animate-gradient {
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Efectos de transición suavizados */
+.glass-effect {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Mejoras de responsividad */
+@media (max-width: 768px) {
+  .text-5xl { font-size: 2.75rem; }
+  .text-6xl { font-size: 3.25rem; }
+  .text-7xl { font-size: 3.75rem; }
+  .text-8xl { font-size: 4.25rem; }
+  
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+  }
+}
+
+/* Optimizaciones de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mejoras de scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles para accesibilidad */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #9AD4EA;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
