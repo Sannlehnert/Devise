@@ -108,7 +108,7 @@ const FreeTemplates = () => {
           </h2>
           <p className="text-xl text-[#B8C2D9] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Aurora', fontWeight: 300 }}>
             Descargá nuestros recursos premium diseñados para elevar tu presencia digital. 
-            <span className="text-[#9AD4EA]"> Totalmente gratis.</span>
+            <span className="text-[#9AD4EA]"> Totalmente GRATIS.</span>
           </p>
         </motion.div>
 
@@ -288,10 +288,6 @@ const FreeTemplates = () => {
                   )}
                 </motion.button>
               </form>
-
-              <p className="text-[#94a3b8] text-xs text-center mt-4" style={{ fontFamily: 'Aurora' }}>
-                Al descargar, aceptás recibir contenido de valor de DEVISE. Podés darte de baja cuando quieras.
-              </p>
             </motion.div>
           </motion.div>
         )}
