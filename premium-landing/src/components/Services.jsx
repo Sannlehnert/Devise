@@ -4,34 +4,30 @@ import { Link } from 'react-scroll';
 
 const services = [
   {
-    title: 'Branding & Identidad',
-    description: 'Desarrollamos identidades visuales únicas que comunican la esencia de tu marca y conectan emocionalmente.',
-    // Placeholder - será reemplazado por imagen diseñada
+    title: 'Diseño Gráfico',
+    description: 'Creamos identidades visuales únicas: logos, flyers, tarjetas y más, que comunican la esencia de tu marca.',
     icon: '🎨', 
     link: 'portfolio',
     color: 'from-[#1C045A] to-[#3A1C7A]'
   },
   {
-    title: 'Social Media',
-    description: 'Estrategias 360° que generan engagement real y convierten seguidores en clientes leales.',
-    // Placeholder - será reemplazado por imagen diseñada
-    icon: '📱',
+    title: 'Videos & Reels',
+    description: 'Producimos contenido audiovisual atractivo y profesional para redes sociales que captura la atención.',
+    icon: '🎬',
     link: 'portfolio',
     color: 'from-[#584485] to-[#7A5CA8]'
   },
   {
-    title: 'Diseño Web',
-    description: 'Experiencias digitales intuitivas y impactantes que convierten visitantes en leads.',
-    // Placeholder - será reemplazado por imagen diseñada
-    icon: '💻',
+    title: 'Fotografía',
+    description: 'Sesiones fotográficas de calidad que resaltan tu producto o servicio con un estilo moderno y atractivo.',
+    icon: '📸',
     link: 'portfolio',
     color: 'from-[#9AD4EA] to-[#7AA8EE]'
   },
   {
-    title: 'Motion Graphics',
-    description: 'Animaciones que dan vida a tus ideas y capturan la atención en segundos.',
-    // Placeholder - será reemplazado por imagen diseñada
-    icon: '🎬',
+    title: 'Estampado de Remeras',
+    description: 'Diseñamos y estampamos remeras con la mejor calidad, ideales para promoción, eventos o tu negocio.',
+    icon: '👕',
     link: 'portfolio',
     color: 'from-[#FF6B9D] to-[#FF8E53]'
   }

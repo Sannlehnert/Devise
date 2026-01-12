@@ -4,24 +4,25 @@ export default function Process() {
   const steps = [
     {
       number: '01',
-      title: 'Diagnóstico',
-      description: 'Analizamos tu marca y objetivos para crear una estrategia personalizada.'
+      title: 'Contacto',
+      description: 'Nos escribís contándonos tu idea o proyecto. Coordinamos una reunión en nuestra oficina.'
     },
     {
       number: '02',
-      title: 'Estrategia',
-      description: 'Desarrollamos un plan detallado con cronograma y KPIs claros.'
+      title: 'Reunión',
+      description: 'Nos encontramos para conocernos, entender tus necesidades y pactar los detalles del trabajo.'
     },
     {
       number: '03',
-      title: 'Ejecución',
-      description: 'Implementamos la estrategia con creatividad y atención al detalle.'
+      title: 'Realización',
+      description: 'Nos ponemos manos a la obra con tu proyecto, aplicando todo nuestro expertise y creatividad.'
     },
     {
       number: '04',
-      title: 'Optimización',
-      description: 'Medimos resultados y ajustamos para maximizar el rendimiento.'
+      title: 'Entrega',
+      description: 'Te entregamos el trabajo con la mejor calidad, listo para impactar a tu audiencia.'
     }
+
   ];
   return (
     <section id="proceso" className="py-24">

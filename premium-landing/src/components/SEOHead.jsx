@@ -9,7 +9,7 @@ export default function SEOHead({
 }) {
   const siteTitle = "Devise Latam";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const siteDescription = description || "Llevamos tus ideas al siguiente nivel con estrategias creativas y soluciones innovadoras de marketing y diseño.";
+  const siteDescription = description || "Agencia de diseño especializada en identidad visual, contenido audiovisual, fotografía y estampado de remeras. Transformamos tus ideas en impacto visual.";
   const siteUrl = url || "https://deviselatam.com.ar";
   const siteImage = image || "/og-image.jpg";
   return (

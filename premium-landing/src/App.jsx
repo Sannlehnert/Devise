@@ -3,6 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Componentes que cargan inmediatamente (críticos)
+import FixHorizontalScroll from "./components/FixHorizontalScroll";
 import SEOHead from "./components/SEOHead";
 import AccessibilityEnhancer from "./components/AccessibilityEnhancer";
 import GalaxyBackground from "./components/GalaxyBackground";
@@ -17,7 +18,6 @@ const Portfolio = lazy(() => import("./components/Portfolio"));
 const BrandCarousel = lazy(() => import("./components/BrandCarousel"));
 const Process = lazy(() => import("./components/Process"));
 const Testimonials = lazy(() => import("./components/Testimonials"));
-const FreeTemplates = lazy(() => import("./components/FreeTemplates"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 const CustomCursor = lazy(() => import("./components/CustomCursor"));
@@ -41,6 +41,7 @@ function HomePage() {
     <>
       <SEOHead />
       <AccessibilityEnhancer />
+      <FixHorizontalScroll />
       <GalaxyBackground />
       <ScrollIndicator />
       <InspirationalMessages />
@@ -72,10 +73,6 @@ function HomePage() {
       </Suspense>
       
       <Suspense fallback={<div className="h-20 bg-transparent"></div>}>
-        <FreeTemplates />
-      </Suspense>
-      
-      <Suspense fallback={<div className="h-20 bg-transparent"></div>}>
         <Contact />
       </Suspense>
       
@@ -98,17 +95,14 @@ export default function App() {
     const preloadCriticalResources = () => {
       const criticalResources = [
         '/img/devisebandera.jpg',
-        '/img/devicesinfondo.png',
-        '/fonts/AkiraExpanded-SuperBold.woff2',
-        '/fonts/AuroraRegular.woff2'
+        '/img/devicesinfondo.png'
       ];
 
       criticalResources.forEach(resource => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.href = resource;
-        link.as = resource.includes('.woff2') ? 'font' : 'image';
-        link.crossOrigin = 'anonymous';
+        link.as = 'image';
         document.head.appendChild(link);
       });
     };

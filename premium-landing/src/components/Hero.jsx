@@ -101,13 +101,13 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
-              <span className="block text-white/95">ELEVA TU</span>
+              <span className="block text-white/95">CREAMOS TU</span>
               <span className="block bg-gradient-to-r from-[#9AD4EA] via-[#7AA8EE] to-[#9AD4EA] bg-clip-text text-transparent bg-size-200 animate-gradient">
-                MARCA
+                IDENTIDAD
               </span>
-              <span className="block text-white/95">AL SIGUIENTE</span>
+              <span className="block text-white/95">VISUAL Y</span>
               <span className="block bg-gradient-to-r from-[#584485] via-[#8A6BC9] to-[#584485] bg-clip-text text-transparent bg-size-200 animate-gradient">
-                NIVEL
+                DIGITAL
               </span>
             </motion.h1>
 
@@ -118,8 +118,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Transformamos visiones en <span className="text-[#9AD4EA] font-medium">experiencias digitales extraordinarias</span>.
-              Donde la creatividad se encuentra con la estrategia para generar impacto real.
+              Somos una agencia de diseño especializada en crear identidades visuales, contenido audiovisual y estampado de remeras.
+              <span className="text-[#9AD4EA] font-medium"> Transformamos tus ideas en realidades impactantes.</span>
             </motion.p>
 
             <motion.div
@@ -134,7 +134,7 @@ export default function Hero() {
                 onHoverEnd={() => setIsHoveringCTA(false)}
                 className="group relative px-12 py-5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-2xl transition-all duration-500 shadow-2xl shadow-[#1C045A]/40 hover:shadow-[#584485]/50 overflow-hidden"
                 style={{ fontFamily: 'Akira Expanded', letterSpacing: '0.05em' }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -2
                 }}
@@ -144,9 +144,9 @@ export default function Hero() {
               >
                 <span className="relative z-10 flex items-center justify-center">
                   COMENZAR PROYECTO
-                  <motion.svg 
-                    className="w-5 h-5 ml-3" 
-                    fill="currentColor" 
+                  <motion.svg
+                    className="w-5 h-5 ml-3"
+                    fill="currentColor"
                     viewBox="0 0 20 20"
                     animate={{ x: isHoveringCTA ? 5 : 0 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -160,7 +160,7 @@ export default function Hero() {
                 onClick={() => handleSmoothScroll('#portfolio')}
                 className="group relative px-12 py-5 border-2 border-white/20 hover:border-[#9AD4EA] text-white font-semibold rounded-2xl transition-all duration-500 backdrop-blur-sm bg-white/5 hover:bg-[#9AD4EA]/10"
                 style={{ fontFamily: 'Akira Expanded', letterSpacing: '0.05em' }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -2
                 }}
@@ -204,7 +204,7 @@ export default function Hero() {
 
                 {!isVideoLoaded && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1C045A]/20 to-[#584485]/20">
-                    <motion.div 
+                    <motion.div
                       className="text-4xl text-[#9AD4EA]"
                       style={{ fontFamily: 'Constantine' }}
                       animate={{ opacity: [0.5, 1, 0.5] }}

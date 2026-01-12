@@ -6,77 +6,53 @@ import { Link } from 'react-router-dom';
 const allProjects = [
   {
     id: 1,
-    title: 'Campaña Branding',
-    desc: 'Identidad visual completa para startup tech innovadora',
-    category: 'Branding',
+    title: 'Identidad Visual para Café',
+    desc: 'Diseño de logo, papelería y packaging para una cafetería artesanal.',
+    category: 'Diseño',
     images: [
-      '/projects/branding-1.jpg',
-      '/projects/branding-2.jpg',
-      '/projects/branding-3.jpg',
-      '/projects/branding-4.jpg'
+      '/projects/cafe-1.jpg',
+      '/projects/cafe-2.jpg',
+      '/projects/cafe-3.jpg',
+      '/projects/cafe-4.jpg'
     ],
     color: 'from-[#1C045A] to-[#3A1C7A]'
   },
   {
     id: 2,
-    title: 'Redes Sociales',
-    desc: 'Estrategia 360° para marca de moda sostenible',
-    category: 'Social Media',
+    title: 'Campaña de Reels para Gym',
+    desc: 'Producción y edición de reels promocionales para un gimnasio local.',
+    category: 'Video',
     images: [
-      '/projects/social-1.jpg',
-      '/projects/social-2.jpg',
-      '/projects/social-3.jpg'
+      '/projects/gym-1.jpg',
+      '/projects/gym-2.jpg',
+      '/projects/gym-3.jpg'
     ],
     color: 'from-[#584485] to-[#7A5CA8]'
   },
   {
     id: 3,
-    title: 'Diseño Web',
-    desc: 'Landing page de alto impacto conversivo',
-    category: 'Diseño Web',
+    title: 'Sesión de Fotos para Restaurante',
+    desc: 'Fotografía profesional de platos y ambiente para un restaurante gourmet.',
+    category: 'Foto',
     images: [
-      '/projects/web-1.jpg',
-      '/projects/web-2.jpg',
-      '/projects/web-3.jpg',
-      '/projects/web-4.jpg'
+      '/projects/restaurant-1.jpg',
+      '/projects/restaurant-2.jpg',
+      '/projects/restaurant-3.jpg',
+      '/projects/restaurant-4.jpg'
     ],
     color: 'from-[#9AD4EA] to-[#7AA8EE]'
   },
   {
     id: 4,
-    title: 'Motion Graphics',
-    desc: 'Animación para campaña publicitaria viral',
-    category: 'Motion',
+    title: 'Estampado para Evento Corporativo',
+    desc: 'Diseño y estampado de remeras para el personal de una empresa tecnológica.',
+    category: 'Estampado',
     images: [
-      '/projects/motion-1.jpg',
-      '/projects/motion-2.jpg',
-      '/projects/motion-3.jpg'
+      '/projects/stamp-1.jpg',
+      '/projects/stamp-2.jpg',
+      '/projects/stamp-3.jpg'
     ],
     color: 'from-[#FF6B9D] to-[#FF8E53]'
-  },
-  {
-    id: 5,
-    title: 'Edición Musical',
-    desc: 'Producción y edición de audio profesional',
-    category: 'Audio',
-    images: [
-      '/projects/audio-1.jpg',
-      '/projects/audio-2.jpg'
-    ],
-    color: 'from-[#00C9B7] to-[#00A896]'
-  },
-  {
-    id: 6,
-    title: 'Diseño UX/UI',
-    desc: 'Experiencia de usuario para aplicación móvil',
-    category: 'Diseño Web',
-    images: [
-      '/projects/ux-1.jpg',
-      '/projects/ux-2.jpg',
-      '/projects/ux-3.jpg',
-      '/projects/ux-4.jpg'
-    ],
-    color: 'from-[#FFD166] to-[#FFB347]'
   }
 ];
 

@@ -2,21 +2,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 const testimonials = [
   {
-    name: 'María Rodríguez',
-    company: 'CEO, FashionBrand',
-    text: 'Devise transformó completamente nuestra presencia digital. Los resultados superaron todas nuestras expectativas.',
+    name: 'María González',
+    company: 'Dueña de Cafetería',
+    text: 'Devise creó toda mi identidad visual desde cero. El logo, flyers y redes sociales reflejan perfectamente mi esencia.',
     rating: 5
   },
   {
-    name: 'Juan Pérez',
-    company: 'Director, TechStartup',
-    text: 'Profesionalismo y creatividad excepcionales. El proceso fue fluido y los resultados espectaculares.',
+    name: 'Juan Martínez',
+    company: 'Gimnasio local',
+    text: 'Los reels que produjeron aumentaron nuestro engagement en un 300%. Profesionales y creativos.',
     rating: 5
   },
   {
-    name: 'Ana López',
-    company: 'Marketing Manager',
-    text: 'Trabajar con Devise fue la mejor decisión. Su enfoque estratégico generó un impacto real en nuestro negocio.',
+    name: 'Ana Rodríguez',
+    company: 'Empresa de eventos',
+    text: 'Las remeras estampadas para nuestro evento fueron un éxito total. Calidad y diseño excepcionales.',
     rating: 5
   }
 ];
