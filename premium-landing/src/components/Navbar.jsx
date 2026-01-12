@@ -13,7 +13,7 @@ export default function Navbar() {
       setIsScrolled(scrolled);
       
       // Detectar sección activa
-      const sections = ['home', 'servicios', 'portfolio', 'proceso', 'testimonios', 'contacto', 'plantillas'];
+      const sections = ['home', 'servicios', 'portfolio', 'proceso', 'testimonios', 'contacto'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {

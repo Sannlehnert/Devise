@@ -10,7 +10,7 @@ const testimonials = [
   {
     name: 'Juan Martínez',
     company: 'Gimnasio local',
-    text: 'Los reels que produjeron aumentaron nuestro engagement en un 300%. Profesionales y creativos.',
+    text: 'Los reels que produjeron aumentaron nuestra audiencia en un 300%. Profesionales y creativos.',
     rating: 5
   },
   {
