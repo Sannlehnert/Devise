@@ -5,17 +5,17 @@ const videoTrailers = [
   {
     src: '/videos/trailer.mp4',
     title: 'Branding Experience',
-    color: 'from-[#1C045A] to-[#3A1C7A]'
+    color: 'from-[#1C045A] to-[#584485]'
   },
   {
     src: '/videos/trailer-2.mp4',
     title: 'Motion Design',
-    color: 'from-[#584485] to-[#7A5CA8]'
+    color: 'from-[#584485] to-[#562689]'
   },
   {
     src: '/videos/trailer-3.mp4',
     title: 'Digital Campaigns',
-    color: 'from-[#9AD4EA] to-[#7AA8EE]'
+    color: 'from-[#9AD4EA] via-[#584485] to-[#9AD4EA]'
   }
 ];
 
@@ -102,13 +102,9 @@ export default function Hero() {
               transition={{ delay: 0.5, duration: 1 }}
             >
               <span className="block text-white/95">CREAMOS TU</span>
-              <span className="block bg-gradient-to-r from-[#9AD4EA] via-[#7AA8EE] to-[#9AD4EA] bg-clip-text text-transparent bg-size-200 animate-gradient">
-                IDENTIDAD
-              </span>
-              <span className="block text-white/95">VISUAL Y</span>
-              <span className="block bg-gradient-to-r from-[#584485] via-[#8A6BC9] to-[#584485] bg-clip-text text-transparent bg-size-200 animate-gradient">
-                DIGITAL
-              </span>
+              <span className="block gradient-devise">IDENTIDAD</span>
+              <span className="block gradient-devise">VISUAL Y</span>
+              <span className="block gradient-devise">DIGITAL</span>
             </motion.h1>
 
             <motion.p
@@ -118,7 +114,11 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Somos una agencia de diseño especializada en crear identidades visuales, contenido audiovisual y estampado de remeras.
+              Somos una <span className="text-devise-accent font-bold">AGENCIA</span> de{' '}
+              <span className="text-devise-accent font-bold">DISEÑO</span> especializada en crear{' '}
+              <span className="text-devise-accent font-bold">IDENTIDADES VISUALES</span>,{' '}
+              <span className="text-devise-accent font-bold">CONTENIDO AUDIOVISUAL</span> y{' '}
+              <span className="text-devise-accent font-bold">ESTAMPADO DE REMERAS</span>.
               <span className="text-[#9AD4EA] font-medium"> Transformamos tus ideas en realidades impactantes.</span>
             </motion.p>
 

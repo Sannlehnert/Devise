@@ -85,7 +85,9 @@ export default function Contact() {
             HABLEMOS DE TU PROYECTO
           </h2>
           <p className="text-xl text-[#B8C2D9] max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'Aurora', fontWeight: 300 }}>
-            ¿Listo para llevar tu marca al siguiente nivel? Contanos sobre tu proyecto y creemos algo extraordinario juntos.
+            ¿Listo para llevar <span className="text-devise-accent font-bold">TU MARCA</span> al siguiente nivel?
+            Contanos sobre <span className="text-devise-accent font-bold">TU PROYECTO</span> y creemos algo extraordinario{' '}
+            <span className="text-devise-accent font-bold">JUNTOS</span>.
           </p>
         </motion.div>
 
@@ -100,7 +102,7 @@ export default function Contact() {
 
           <form
             onSubmit={handleSubmit}
-            className="relative glass-effect rounded-3xl p-8 md:p-12 backdrop-blur-xl"
+            className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-10 max-w-2xl mx-auto shadow-2xl"
           >
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <motion.div
@@ -117,8 +119,8 @@ export default function Contact() {
                   type="text"
                   value={form.name}
                   onChange={handleChange}
-                  className="ultimate-input w-full"
-                  placeholder="Tu nombre completo"
+                  className="input-devise-minimal w-full"
+                  placeholder="Tu nombre"
                 />
                 {errors.name && (
                   <motion.p
@@ -146,7 +148,7 @@ export default function Contact() {
                   type="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="ultimate-input w-full"
+                  className="input-devise-minimal w-full"
                   placeholder="tu@empresa.com"
                 />
                 {errors.email && (
@@ -201,8 +203,7 @@ export default function Contact() {
                 <motion.button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="btn-cosmic disabled:opacity-50 disabled:cursor-not-allowed min-w-[200px] group"
-                  style={{ fontFamily: 'Akira Expanded' }}
+                  className="btn-devise-minimal w-full"
                   whileHover={{ scale: status !== 'sending' ? 1.05 : 1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -212,16 +213,9 @@ export default function Contact() {
                       ENVIANDO...
                     </span>
                   ) : status === 'success' ? (
-                    '✅ ENVIADO'
-                  ) : status === 'error' ? (
-                    '❌ ERROR'
+                    '✅ MENSAJE ENVIADO'
                   ) : (
-                    <span className="flex items-center justify-center">
-                      ENVIAR MENSAJE
-                      <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </span>
+                    'ENVIAR MENSAJE'
                   )}
                 </motion.button>
 

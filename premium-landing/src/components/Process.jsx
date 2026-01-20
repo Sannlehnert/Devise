@@ -1,79 +1,103 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-export default function Process() {
-  const steps = [
-    {
-      number: '01',
-      title: 'Contacto',
-      description: 'Nos escribís contándonos tu idea o proyecto. Coordinamos una reunión en nuestra oficina.'
-    },
-    {
-      number: '02',
-      title: 'Reunión',
-      description: 'Nos encontramos para conocernos, entender tus necesidades y pactar los detalles del trabajo.'
-    },
-    {
-      number: '03',
-      title: 'Realización',
-      description: 'Nos ponemos manos a la obra con tu proyecto, aplicando todo nuestro expertise y creatividad.'
-    },
-    {
-      number: '04',
-      title: 'Entrega',
-      description: 'Te entregamos el trabajo con la mejor calidad, listo para impactar a tu audiencia.'
-    }
 
-  ];
+const steps = [
+  {
+    number: '01',
+    title: 'Contacto',
+    description: 'Nos escribís contándonos tu idea o proyecto.'
+  },
+  {
+    number: '02',
+    title: 'Reunión',
+    description: 'Coordinamos una reunión en nuestra oficina para conocernos y pactar detalles.'
+  },
+  {
+    number: '03',
+    title: 'Realización',
+    description: 'Nos ponemos manos a la obra con tu proyecto, aplicando todo nuestro expertise.'
+  },
+  {
+    number: '04',
+    title: 'Entrega',
+    description: 'Te entregamos el trabajo con la mejor calidad, lista para impactar.'
+  }
+];
+
+export default function Process() {
   return (
-    <section id="proceso" className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="proceso" className="py-20 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1C045A]/5 to-transparent"></div>
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
-            NUESTRO PROCESO
+          <h2 className="minimal-heading text-3xl md:text-4xl mb-4" style={{ fontFamily: 'Akira Expanded' }}>
+            <span className="text-white/95">PROCESO </span>
+            <span className="text-[#9AD4EA]">CLARO</span>
           </h2>
-          <p className="text-[#94a3b8] max-w-2xl mx-auto" style={{ fontFamily: 'Aurora' }}>
-            Simple, probado y enfocado en resultados. Así llevamos cada proyecto al éxito.
+          <p className="minimal-body text-[#B8C2D9]/70 max-w-lg mx-auto">
+            Simple, directo y enfocado en resultados. Así trabajamos.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              className="text-center"
-            >
-              <div className="w-16 h-16 bg-gradient-to-r from-[#1C045A] to-[#584485] rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-xl" style={{ fontFamily: 'Akira Expanded' }}>
-                  {step.number}
-                </span>
-              </div>
 
-              <h3 className="text-white text-lg font-semibold mb-4" style={{ fontFamily: 'Akira Expanded' }}>
-                {step.title}
-              </h3>
+        {/* Timeline minimalista simplificada */}
+        <div className="relative max-w-3xl mx-auto">
+          {/* Línea de tiempo */}
+          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1C045A] via-[#584485] to-[#9AD4EA]"></div>
 
-              <p className="text-[#94a3b8] text-sm" style={{ fontFamily: 'Aurora' }}>
-                {step.description}
-              </p>
+          <div className="space-y-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                className="relative flex items-start gap-6"
+              >
+                {/* Punto en la línea */}
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-[#1C045A] to-[#584485] border-2 border-[#9AD4EA]/30 flex items-center justify-center z-10">
+                  <span className="text-white text-sm font-bold">{step.number}</span>
+                </div>
 
-              <div className="mt-6">
-                <div className="w-12 h-0.5 bg-[#9AD4EA] mx-auto"></div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 left-1/2 w-full h-0.5 bg-[#9AD4EA]/20 transform -translate-y-1/2"></div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                {/* Contenido */}
+                <div className="flex-1 card-devise-minimal p-6">
+                  <h3 className="minimal-heading text-xl mb-3 text-white/90">
+                    {step.title}
+                  </h3>
+                  <p className="minimal-body text-[#B8C2D9]/70">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        {/* CTA final del proceso */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <div className="inline-block p-4 rounded-2xl bg-gradient-to-r from-[#1C045A]/10 to-[#584485]/10 border border-[#9AD4EA]/10">
+            <p className="minimal-body text-[#B8C2D9]/70 mb-3">
+              ¿Listo para comenzar?
+            </p>
+            <a
+              href="#contacto"
+              className="btn-devise-minimal inline-flex items-center"
+            >
+              Agendar reunión
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

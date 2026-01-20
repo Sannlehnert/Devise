@@ -66,8 +66,7 @@ export default function Navbar() {
     { name: 'Servicios', href: '#servicios', id: 'servicios' },
     { name: 'Proyectos', href: '#portfolio', id: 'portfolio' },
     { name: 'Proceso', href: '#proceso', id: 'proceso' },
-    { name: 'Testimonios', href: '#testimonios', id: 'testimonios' },
-    { name: 'Plantillas', href: '#plantillas', id: 'plantillas' },
+    { name: 'Testimonios', href: '#testimonios', id: 'testimonios' }
   ];
 
   return (
@@ -115,11 +114,11 @@ export default function Navbar() {
               key={item.name}
               href={item.href}
               onClick={() => handleSmoothScroll(item.href, item.id)}
-              className={`relative px-4 py-2 rounded-xl transition-all duration-300 ${
-                activeSection === item.id 
-                  ? 'text-[#9AD4EA] bg-gradient-to-r from-[#1C045A]/20 to-[#584485]/20' 
-                  : 'text-[#94a3b8] hover:text-white hover:bg-white/5'
-              } border border-transparent hover:border-white/10`}
+              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                activeSection === item.id
+                  ? 'text-[#9AD4EA] bg-gradient-to-r from-[#1C045A]/20 to-[#584485]/20 border border-[#9AD4EA]/20'
+                  : 'text-[#94a3b8] hover:text-white hover:bg-white/5 border border-transparent'
+              }`}
               style={{ fontFamily: 'Aurora', fontSize: '0.95rem' }}
               whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -144,7 +143,7 @@ export default function Navbar() {
           <motion.a
             href="#contacto"
             onClick={() => handleSmoothScroll('#contacto', 'contacto')}
-            className="px-6 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#1C045A]/30 border border-[#9AD4EA]/20"
+            className="px-6 py-3 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#1C045A]/30 border border-[#9AD4EA]/20"
             style={{ fontFamily: 'Akira Expanded', fontSize: '0.9rem' }}
             whileHover={{ 
               scale: 1.05,

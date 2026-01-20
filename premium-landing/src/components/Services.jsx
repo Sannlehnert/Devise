@@ -5,134 +5,145 @@ import { Link } from 'react-scroll';
 const services = [
   {
     title: 'Diseño Gráfico',
-    description: 'Creamos identidades visuales únicas: logos, flyers, tarjetas y más, que comunican la esencia de tu marca.',
-    icon: '🎨', 
-    link: 'portfolio',
-    color: 'from-[#1C045A] to-[#3A1C7A]'
+    description: 'Logos, flyers, identidad visual completa',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+    color: '#1C045A',
+    link: 'portfolio'
   },
   {
     title: 'Videos & Reels',
-    description: 'Producimos contenido audiovisual atractivo y profesional para redes sociales que captura la atención.',
-    icon: '🎬',
-    link: 'portfolio',
-    color: 'from-[#584485] to-[#7A5CA8]'
+    description: 'Contenido audiovisual profesional para redes',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+    ),
+    color: '#584485',
+    link: 'portfolio'
   },
   {
     title: 'Fotografía',
-    description: 'Sesiones fotográficas de calidad que resaltan tu producto o servicio con un estilo moderno y atractivo.',
-    icon: '📸',
-    link: 'portfolio',
-    color: 'from-[#9AD4EA] to-[#7AA8EE]'
+    description: 'Sesiones profesionales de producto y marca',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    color: '#9AD4EA',
+    link: 'portfolio'
   },
   {
-    title: 'Estampado de Remeras',
-    description: 'Diseñamos y estampamos remeras con la mejor calidad, ideales para promoción, eventos o tu negocio.',
-    icon: '👕',
-    link: 'portfolio',
-    color: 'from-[#FF6B9D] to-[#FF8E53]'
+    title: 'Estampado',
+    description: 'Remeras y productos con la mejor calidad',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+    color: '#F9DB5F',
+    link: 'portfolio'
   }
 ];
 
 export default function Services() {
   return (
-    <section id="servicios" className="py-28 relative overflow-hidden">
-      {/* Efecto de fondo sutil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f1d]/20 to-transparent"></div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section id="servicios" className="py-20 relative">
+      {/* Fondo sutil */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f1d]/10 to-transparent"></div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Header minimalista */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-[#9AD4EA] bg-clip-text text-transparent" style={{ fontFamily: 'Akira Expanded' }}>
-            SERVICIOS PREMIUM
+          <h2 className="minimal-heading text-3xl md:text-4xl mb-4" style={{ fontFamily: 'Akira Expanded' }}>
+            <span className="text-white/95">SERVICIOS </span>
+            <span className="gradient-devise-premium">PREMIUM</span>
           </h2>
-          <p className="text-xl text-[#B8C2D9] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Aurora', fontWeight: 300 }}>
-            Soluciones integrales diseñadas para escalar tu presencia digital y transformar tu marca en una experiencia memorable.
+          <p className="minimal-body text-[#B8C2D9]/70 max-w-xl mx-auto">
+            Soluciones integrales <span className="text-devise-accent font-bold">DISEÑADAS</span> para escalar{' '}
+            <span className="text-devise-accent font-bold">TU PRESENCIA DIGITAL</span> y transformar{' '}
+            <span className="text-devise-accent font-bold">TU MARCA</span> en una experiencia memorable
           </p>
         </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+
+        {/* Grid de servicios - UX clara */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
             >
-              <Link 
-                to={service.link} 
-                smooth={true} 
-                duration={800}
-                className="block cursor-pointer"
+              <Link
+                to={service.link}
+                smooth={true}
+                duration={500}
+                className="block h-full"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}></div>
-                
-                <div className="relative bg-[#0f172a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-[#0f172a]/80">
-                  <div className="flex flex-col items-center text-center h-full">
-                    {/* Icono - Placeholder para imagen diseñada */}
-                    <div className={`w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-2xl`}>
-                      {/* Placeholder temporal - se reemplazará por imagen */}
-                      <div className="text-3xl">{service.icon}</div>
-                      
-                      {/* Comentario para cuando tengan las imágenes */}
-                      {/* <img 
-                        src={`/icons/${service.title.toLowerCase().replace(' ', '-')}.svg`}
-                        alt={service.title}
-                        className="w-10 h-10"
-                      /> */}
-                    </div>
-                    
-                    <h3 className="text-white text-xl font-bold mb-4 leading-tight" style={{ fontFamily: 'Akira Expanded' }}>
-                      {service.title}
-                    </h3>
-
-                    <p className="text-[#94a3b8] text-sm leading-relaxed mb-6 flex-grow" style={{ fontFamily: 'Aurora' }}>
-                      {service.description}
-                    </p>
-
-                    {/* Botón de acción */}
-                    <div className="mt-auto w-full">
-                      <div className="inline-flex items-center text-[#9AD4EA] text-sm font-semibold group-hover:translate-x-2 transition-transform duration-300" style={{ fontFamily: 'Aurora' }}>
-                        <span>Descubrir más</span>
-                        <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                      </div>
+                <div className="card-devise-minimal p-6 h-full flex flex-col items-center text-center group cursor-pointer">
+                  {/* Icono con color de la paleta */}
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: `linear-gradient(135deg, ${service.color}20, ${service.color}10)`,
+                      border: `1px solid ${service.color}30`
+                    }}
+                  >
+                    <div style={{ color: service.color }}>
+                      {service.icon}
                     </div>
                   </div>
-                </div>
 
-                {/* Efecto de brillo al hover */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  {/* Título */}
+                  <h3 className="minimal-heading text-lg mb-3 text-white/90">
+                    {service.title}
+                  </h3>
+
+                  {/* Descripción */}
+                  <p className="minimal-body text-sm text-[#B8C2D9]/70 mb-4 flex-grow">
+                    {service.description}
+                  </p>
+
+                  {/* Indicador sutil */}
+                  <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-[#9AD4EA] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </Link>
             </motion.div>
           ))}
         </div>
-        
+
+        {/* CTA sutil */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-16"
+          transition={{ delay: 0.5 }}
+          className="text-center mt-12"
         >
+          <p className="minimal-body text-[#B8C2D9]/60 mb-4">
+            ¿Necesitas algo específico?
+          </p>
           <Link
-            to="portfolio"
+            to="contacto"
             smooth={true}
-            duration={800}
-            className="inline-flex items-center px-12 py-5 bg-gradient-to-r from-[#1C045A] to-[#584485] hover:from-[#584485] hover:to-[#1C045A] text-white font-semibold rounded-2xl transition-all duration-500 hover:scale-105 shadow-2xl shadow-[#1C045A]/40 hover:shadow-[#584485]/50 group"
-            style={{ fontFamily: 'Akira Expanded', letterSpacing: '0.05em' }}
+            duration={500}
+            className="inline-flex items-center text-[#9AD4EA] hover:text-[#9AD4EA]/80 transition-colors minimal-body text-sm"
           >
-            EXPLORAR TODOS LOS SERVICIOS
-            <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            Háblanos de tu proyecto
+            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
         </motion.div>

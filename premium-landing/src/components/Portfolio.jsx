@@ -410,8 +410,10 @@ export default function Portfolio() {
             PROYECTOS DESTACADOS
           </h2>
           <p className="text-xl text-[#B8C2D9] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Aurora', fontWeight: 300 }}>
-            Una selección de nuestros trabajos más representativos.
-            Cada proyecto cuenta una historia única de creatividad y estrategia.
+            Una selección de <span className="text-devise-accent font-bold">NUESTROS TRABAJOS</span> más representativos.
+            Cada proyecto cuenta una <span className="text-devise-accent font-bold">HISTORIA ÚNICA</span> de{' '}
+            <span className="text-devise-accent font-bold">CREATIVIDAD</span> y{' '}
+            <span className="text-devise-accent font-bold">ESTRATEGIA</span>.
           </p>
         </motion.div>
 
