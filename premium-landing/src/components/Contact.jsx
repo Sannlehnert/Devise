@@ -13,7 +13,7 @@ const EMAILJS_CONFIG = {
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
@@ -30,6 +30,8 @@ export default function Contact() {
     if (!form.name.trim()) newErrors.name = 'Nombre es requerido';
     if (!form.email.trim()) newErrors.email = 'Email es requerido';
     else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = 'Email no válido';
+    if (!form.phone.trim()) newErrors.phone = 'Teléfono es requerido';
+    if (!form.service.trim()) newErrors.service = 'Seleccioná un servicio';
     if (!form.message.trim()) newErrors.message = 'Mensaje es requerido';
     return newErrors;
   };
@@ -159,6 +161,72 @@ export default function Contact() {
                     style={{ fontFamily: 'Aurora' }}
                   >
                     ⚠️ {errors.email}
+                  </motion.p>
+                )}
+              </motion.div>
+            </div>
+
+            {/* Nueva fila: Teléfono y Servicio */}
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <label htmlFor="phone" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
+                  📱 Teléfono (WhatsApp)
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="input-devise-minimal w-full"
+                  placeholder="+54 9 299 000-0000"
+                />
+                {errors.phone && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-red-400 text-sm mt-2 flex items-center"
+                    style={{ fontFamily: 'Aurora' }}
+                  >
+                    ⚠️ {errors.phone}
+                  </motion.p>
+                )}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <label htmlFor="service" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
+                  🎯 Servicio de interés
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  value={form.service}
+                  onChange={handleChange}
+                  className="input-devise-minimal w-full"
+                >
+                  <option value="">Seleccioná un servicio</option>
+                  <option value="Diseño Gráfico">Diseño Gráfico</option>
+                  <option value="Videos & Reels">Videos & Reels</option>
+                  <option value="Fotografía">Fotografía</option>
+                  <option value="Estampado">Estampado</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                {errors.service && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-red-400 text-sm mt-2 flex items-center"
+                    style={{ fontFamily: 'Aurora' }}
+                  >
+                    ⚠️ {errors.service}
                   </motion.p>
                 )}
               </motion.div>

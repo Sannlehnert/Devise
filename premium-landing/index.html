@@ -3,21 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Devise Latam</title>
-  <meta name="description" content="Agencia de diseño especializada en identidad visual, contenido audiovisual, fotografía y estampado de remeras en Neuquén." />
-  <link rel="icon" href="/img/iconodevise.png" />
-
-  <!-- Precarga de fuentes -->
+  <title>Devise | Agencia de Diseño y Marketing en Neuquén</title>
+  
+  <!-- SEO Optimizado -->
+  <meta name="description" content="Devise - Agencia de diseño y marketing en Neuquén. Creamos identidades visuales, contenido audiovisual, fotografía profesional y estampado de remeras premium." />
+  <meta name="keywords" content="diseño gráfico, marketing digital, fotografía, videos, reels, estampado, Neuquén, identidad visual, branding" />
+  <meta name="author" content="Devise Latam" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Devise | Agencia de Diseño y Marketing en Neuquén" />
+  <meta property="og:description" content="Creamos identidades visuales, contenido audiovisual y estampado premium." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/img/iconodevise.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/img/iconodevise.png" />
+  
+  <!-- Precarga de fuentes locales -->
   <link rel="preload" href="/fonts/AkiraExpanded-SuperBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/fonts/AuroraRegular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/Constantine.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <!-- Precarga de imágenes críticas -->
-  <link rel="preload" href="/img/devisebandera.jpg" as="image">
-  <link rel="preload" href="/img/devicesinfondo.png" as="image">
+  <!-- Precarga de imágenes críticas con prioridad alta -->
+  <link rel="preload" href="/img/devisebandera.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="/img/devicesinfondo.png" as="image" fetchpriority="high">
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
   <!-- Estilos críticos inline -->
   <style>
-    /* Estilos críticos para evitar FOUC */
     body {
       margin: 0;
       padding: 0;
@@ -26,7 +43,6 @@
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
     }
-
     .loading-spinner {
       position: fixed;
       top: 0;
@@ -40,12 +56,6 @@
       z-index: 9999;
     }
   </style>
-
-  <!-- SEO essentials -->
-  <meta name="description" content="Servicios profesionales de social media y marketing. Landing minimalista y experiencia de usuario premium." />
-  <meta property="og:title" content="Agencia · Social & Marketing" />
-  <meta property="og:description" content="Servicios profesionales de social media y marketing. Portfolio y contacto." />
-  <meta property="og:type" content="website" />
 </head>
 
 <body>
@@ -58,8 +68,22 @@
     </div>
   </div>
 
-  <!-- Carga de fuentes de Google de forma asíncrona -->
+  <!-- Fuentes Google como backup -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  </noscript>
+
+  <!-- Google Analytics (descomenta con tu ID) -->
+  <!-- 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+  -->
 
   <script type="module" src="/src/main.jsx"></script>
 </body>

@@ -184,6 +184,7 @@ function ProjectCarousel({ project, isActive, onClose }) {
                 src={project.images[currentImageIndex]}
                 alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
                 className="w-full h-full object-contain"
+                loading="lazy"
                 onError={(e) => {
                   e.target.src = `https://placehold.co/800x600/1C045A/FFFFFF?text=${project.title}+${currentImageIndex + 1}`;
                 }}
@@ -294,6 +295,7 @@ function ProjectCard({ project, index, onOpen }) {
               src={project.images[currentPreviewIndex]}
               alt={project.title}
               className="w-full h-full object-cover"
+              loading="lazy"
               onError={(e) => {
                 e.target.src = `https://placehold.co/400x300/1C045A/FFFFFF?text=${project.title}`;
               }}

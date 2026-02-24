@@ -9,6 +9,7 @@ import AccessibilityEnhancer from "./components/AccessibilityEnhancer";
 import GalaxyBackground from "./components/GalaxyBackground";
 import ScrollIndicator from "./components/ScrollIndicator";
 import InspirationalMessages from "./components/InspirationalMessages";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 // Lazy load para componentes no críticos
 const Navbar = lazy(() => import("./components/Navbar"));
@@ -22,6 +23,7 @@ const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 const CustomCursor = lazy(() => import("./components/CustomCursor"));
 const AllProjects = lazy(() => import("./components/AllProjects"));
+const FAQ = lazy(() => import("./components/FAQ"));
 
 function LoadingSpinner() {
   return (
@@ -77,6 +79,10 @@ function HomePage() {
       </Suspense>
       
       <Suspense fallback={<div className="h-20 bg-transparent"></div>}>
+        <FAQ />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-20 bg-transparent"></div>}>
         <Footer />
       </Suspense>
       
@@ -125,6 +131,7 @@ export default function App() {
     <HelmetProvider>
       <Router>
         <div className="relative min-h-screen cosmic-bg">
+          <FloatingWhatsApp />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/proyectos" element={
