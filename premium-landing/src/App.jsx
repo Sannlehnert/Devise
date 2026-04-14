@@ -21,7 +21,6 @@ const Process = lazy(() => import("./components/Process"));
 const Testimonials = lazy(() => import("./components/Testimonials"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
-const CustomCursor = lazy(() => import("./components/CustomCursor"));
 const AllProjects = lazy(() => import("./components/AllProjects"));
 const FAQ = lazy(() => import("./components/FAQ"));
 
@@ -86,9 +85,6 @@ function HomePage() {
         <Footer />
       </Suspense>
       
-      <Suspense fallback={null}>
-        <CustomCursor />
-      </Suspense>
     </>
   );
 }

@@ -25,11 +25,11 @@ export default function Hero() {
   const [isHoveringCTA, setIsHoveringCTA] = useState(false);
   const videoRef = useRef(null);
 
-  // Efecto para cambiar automáticamente los videos (15 segundos)
+  // Efecto para cambiar automáticamente los videos (20 segundos)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex(prev => (prev + 1) % videoTrailers.length);
-    }, 15000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
@@ -144,15 +144,6 @@ export default function Hero() {
               >
                 <span className="relative z-10 flex items-center justify-center">
                   COMENZAR PROYECTO
-                  <motion.svg
-                    className="w-5 h-5 ml-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    animate={{ x: isHoveringCTA ? 5 : 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </motion.svg>
                 </span>
               </motion.button>
 
@@ -170,10 +161,6 @@ export default function Hero() {
               >
                 <span className="group-hover:text-[#9AD4EA] transition-colors duration-300 flex items-center justify-center">
                   VER PORTFOLIO
-                  <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                    <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                  </svg>
                 </span>
               </motion.button>
             </motion.div>

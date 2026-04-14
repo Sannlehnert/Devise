@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import CustomCursor from './CustomCursor';
 
 const allProjects = [
     {
@@ -258,13 +257,13 @@ function ProjectCard({ project, index, onOpen }) {
 
     const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
 
-    // Auto-carrusel en hover (20 segundos)
+    // Auto-carrusel en hover (5 segundos para videos)
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentPreviewIndex(prev =>
                 prev === project.images.length - 1 ? 0 : prev + 1
             );
-        }, 20000);
+        }, 5000);
 
         return () => clearInterval(interval);
     }, [project.images.length]);
@@ -424,11 +423,11 @@ export default function AllProjects() {
 
     const activeProjectData = allProjects.find(p => p.id === activeProject);
 
-    return (
+  return (
         <div className="min-h-screen cosmic-bg pt-32">
-            <CustomCursor />
             {/* Header de la página */}
             <section className="relative py-20 overflow-hidden">
+
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1C045A]/10 to-[#584485]/10"></div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
