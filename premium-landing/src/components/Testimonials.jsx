@@ -2,21 +2,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 const testimonials = [
   {
-    name: 'María González',
-    company: 'Dueña de Cafetería',
+    name: 'Daniela Tifner',
+    company: 'Curly Food Truck',
     text: 'Devise creó toda mi identidad visual desde cero. El logo, flyers y redes sociales reflejan perfectamente mi esencia.',
     rating: 5
   },
   {
-    name: 'Juan Martínez',
-    company: 'Gimnasio local',
+    name: 'Mauro Codina',
+    company: 'MC Gym',
     text: 'Los reels que produjeron aumentaron nuestra audiencia en un 300%. Profesionales y creativos.',
     rating: 5
   },
   {
-    name: 'Ana Rodríguez',
-    company: 'Empresa de eventos',
-    text: 'Las remeras estampadas para nuestro evento fueron un éxito total. Calidad y diseño excepcionales.',
+    name: 'Diego Caballero',
+    company: 'DC United',
+    text: 'El equipo de Devise entendió mi visión y la plasmó en cada pieza gráfica. ¡Recomiendo 100%!',
     rating: 5
   }
 ];

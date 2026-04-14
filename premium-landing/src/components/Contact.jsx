@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
 
-// ✅ Configuración CORRECTA de EmailJS
+//Configuración CORRECTA de EmailJS
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_qix8jhb',
   TEMPLATE_ID: 'template_lt3xuk4',
@@ -113,7 +113,7 @@ export default function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <label htmlFor="name" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                  👤 Nombre completo
+                  Nombre completo
                 </label>
                 <input
                   id="name"
@@ -131,7 +131,7 @@ export default function Contact() {
                     className="text-red-400 text-sm mt-2 flex items-center"
                     style={{ fontFamily: 'Aurora' }}
                   >
-                    ⚠️ {errors.name}
+                    {errors.name}
                   </motion.p>
                 )}
               </motion.div>
@@ -142,7 +142,7 @@ export default function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <label htmlFor="email" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                  📧 Email profesional
+                  Email profesional
                 </label>
                 <input
                   id="email"
@@ -160,7 +160,7 @@ export default function Contact() {
                     className="text-red-400 text-sm mt-2 flex items-center"
                     style={{ fontFamily: 'Aurora' }}
                   >
-                    ⚠️ {errors.email}
+                    {errors.email}
                   </motion.p>
                 )}
               </motion.div>
@@ -174,7 +174,7 @@ export default function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <label htmlFor="phone" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                  📱 Teléfono (WhatsApp)
+                  Teléfono (WhatsApp)
                 </label>
                 <input
                   id="phone"
@@ -192,7 +192,7 @@ export default function Contact() {
                     className="text-red-400 text-sm mt-2 flex items-center"
                     style={{ fontFamily: 'Aurora' }}
                   >
-                    ⚠️ {errors.phone}
+                    {errors.phone}
                   </motion.p>
                 )}
               </motion.div>
@@ -203,7 +203,7 @@ export default function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <label htmlFor="service" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                  🎯 Servicio de interés
+                  Servicio de interés
                 </label>
                 <select
                   id="service"
@@ -226,7 +226,7 @@ export default function Contact() {
                     className="text-red-400 text-sm mt-2 flex items-center"
                     style={{ fontFamily: 'Aurora' }}
                   >
-                    ⚠️ {errors.service}
+                    {errors.service}
                   </motion.p>
                 )}
               </motion.div>
@@ -239,7 +239,7 @@ export default function Contact() {
               className="mb-8"
             >
               <label htmlFor="message" className="block text-lg font-medium mb-4 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                💬 Contanos sobre tu proyecto
+                Contanos sobre tu proyecto
               </label>
               <textarea
                 id="message"
@@ -257,7 +257,7 @@ export default function Contact() {
                   className="text-red-400 text-sm mt-2 flex items-center"
                   style={{ fontFamily: 'Aurora' }}
                   >
-                    ⚠️ {errors.message}
+                    {errors.message}
                   </motion.p>
                 )}
               </motion.div>
@@ -281,16 +281,11 @@ export default function Contact() {
                       ENVIANDO...
                     </span>
                   ) : status === 'success' ? (
-                    '✅ MENSAJE ENVIADO'
+                    'MENSAJE ENVIADO'
                   ) : (
                     'ENVIAR MENSAJE'
                   )}
                 </motion.button>
-
-                <div className="text-sm text-[#94a3b8] flex items-center" style={{ fontFamily: 'Aurora' }}>
-                  <div className="w-2 h-2 bg-[#9AD4EA] rounded-full mr-3 animate-pulse"></div>
-                  Respuesta garantizada en menos de 24h
-                </div>
               </motion.div>
 
               {status === 'success' && (
@@ -300,7 +295,7 @@ export default function Contact() {
                   className="mt-6 p-4 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl text-green-300 text-center backdrop-blur-sm"
                   style={{ fontFamily: 'Aurora' }}
                 >
-                  🎉 ¡Mensaje enviado correctamente! Te contactaremos dentro de las próximas 24 horas.
+                  ¡Mensaje enviado correctamente! Te contactaremos dentro de las próximas 24 horas.
                 </motion.div>
               )}
 
@@ -311,7 +306,7 @@ export default function Contact() {
                   className="mt-6 p-4 bg-gradient-to-r from-red-900/20 to-pink-900/20 border border-red-500/30 rounded-xl text-red-300 text-center backdrop-blur-sm"
                   style={{ fontFamily: 'Aurora' }}
                 >
-                  ❌ Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctanos directamente.
+                  Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctanos directamente.
                 </motion.div>
               )}
             </form>

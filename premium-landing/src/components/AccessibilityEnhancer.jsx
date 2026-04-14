@@ -61,7 +61,7 @@ export default function AccessibilityEnhancer() {
           }
         });
       } catch (error) {
-        console.log('Error en mejora de accesibilidad:', error);
+        // Error silencioso en producción
       }
     };
 

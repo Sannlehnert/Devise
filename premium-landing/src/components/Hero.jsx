@@ -3,20 +3,20 @@ import { motion } from 'framer-motion'; // Solo importamos motion, no AnimatePre
 
 const videoTrailers = [
   {
-    src: '/videos/trailer.mp4',
+    src: '/videos/experienciaelite.mp4',
     title: 'Branding Experience',
     color: 'from-[#1C045A] to-[#584485]'
   },
   {
-    src: '/videos/trailer-2.mp4',
-    title: 'Motion Design',
-    color: 'from-[#584485] to-[#562689]'
+    src: '/videos/trailer-3.mp4',
+    title: 'Gimnasio Mc',
+    color: 'from-[#9AD4EA] via-[#584485] to-[#9AD4EA]'
   },
   {
-    src: '/videos/trailer-3.mp4',
-    title: 'Digital Campaigns',
-    color: 'from-[#9AD4EA] via-[#584485] to-[#9AD4EA]'
-  }
+    src: '/videos/trailer.mp4',
+    title: 'Content Creation',
+    color: 'from-[#584485] to-[#562689]'
+  },
 ];
 
 export default function Hero() {
@@ -25,11 +25,11 @@ export default function Hero() {
   const [isHoveringCTA, setIsHoveringCTA] = useState(false);
   const videoRef = useRef(null);
 
-  // Efecto para cambiar automáticamente los videos
+  // Efecto para cambiar automáticamente los videos (15 segundos)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex(prev => (prev + 1) % videoTrailers.length);
-    }, 6000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
@@ -186,37 +186,32 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ delay: 1.2, duration: 1 }}
           >
-            <div className="relative w-full aspect-video rounded-3xl bg-gradient-to-br from-[#1C045A] via-[#584485] to-[#9AD4EA] p-[2px] shadow-2xl shadow-[#1C045A]/30 hover:shadow-[#9AD4EA]/20 transition-all duration-500 group">
-              <div className="w-full h-full rounded-2xl bg-[#030631] flex items-center justify-center overflow-hidden relative">
-                <video
-                  key={currentVideoIndex}
-                  ref={videoRef}
-                  className="w-full h-full object-cover scale-105"
-                  muted
-                  playsInline
-                  preload="metadata"
-                  poster="/img/video-poster.jpg"
-                  aria-label={`Video demostrativo: ${videoTrailers[currentVideoIndex].title}`}
-                >
-                  <source src={videoTrailers[currentVideoIndex].src} type="video/mp4" />
-                  Tu navegador no soporta el elemento video.
-                </video>
+            <div className="relative w-full aspect-video rounded-3xl shadow-2xl shadow-[#1C045A]/30">
+              <div className="w-full h-full rounded-3xl bg-gradient-to-br from-[#1C045A]/10 via-[#584485]/10 to-[#9AD4EA]/10 p-[1px]">
+                <div className="w-full h-full rounded-[22px] bg-[#030631] flex items-center justify-center overflow-hidden">
+                  <video
+                    key={currentVideoIndex}
+                    ref={videoRef}
+                    className="w-full h-full object-cover"
+                    muted
+                    playsInline
+                    preload="metadata"
+                    poster="/img/video-poster.jpg"
+                    style={{ border: 'none', outline: 'none' }}
+                    aria-label={`Video demostrativo: ${videoTrailers[currentVideoIndex].title}`}
+                  >
+                    <source src={videoTrailers[currentVideoIndex].src} type="video/mp4" />
+                    Tu navegador no soporta el elemento video.
+                  </video>
 
-                {!isVideoLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1C045A]/20 to-[#584485]/20">
-                    <motion.div
-                      className="text-4xl text-[#9AD4EA]"
-                      style={{ fontFamily: 'Constantine' }}
-                      animate={{ opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      DEVISE
-                    </motion.div>
-                  </div>
-                )}
+                  {!isVideoLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1C045A]/20 to-[#584485]/20">
+                    </div>
+                  )}
 
-                {/* Overlay sutil */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030631]/40 via-transparent to-transparent"></div>
+                  {/* Overlay sutil */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030631]/40 via-transparent to-transparent"></div>
+                </div>
               </div>
             </div>
           </motion.div>

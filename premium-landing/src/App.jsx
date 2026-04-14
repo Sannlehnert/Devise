@@ -97,28 +97,10 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Precarga simplificada y segura
-    const preloadCriticalResources = () => {
-      const criticalResources = [
-        '/img/devisebandera.jpg',
-        '/img/devicesinfondo.png'
-      ];
-
-      criticalResources.forEach(resource => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = resource;
-        link.as = 'image';
-        document.head.appendChild(link);
-      });
-    };
-
-    preloadCriticalResources();
-
-    // Timeout de carga más corto
+    // Simular carga instantánea - remover spinner innecesario
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);

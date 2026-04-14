@@ -7,53 +7,54 @@ import CustomCursor from './CustomCursor';
 const allProjects = [
     {
         id: 1,
-        title: 'Identidad Visual para Café',
-        desc: 'Diseño de logo, papelería y packaging para una cafetería artesanal.',
+        title: 'Identidad Visual y Social Media - Curly Food Truck',
+        desc: 'Rediseño integral de marca, creación de mascota institucional y desarrollo de piezas gráficas para eventos masivos y redes sociales.',
         category: 'Diseño',
         images: [
-            '/projects/cafe-1.jpg',
-            '/projects/cafe-2.jpg',
-            '/projects/cafe-3.jpg',
-            '/projects/cafe-4.jpg'
+            '/projects/curly1.jpg',
+            '/projects/curly2.jpg',
+            '/projects/curly3.jpg',
+            '/projects/curly4.jpg'
         ],
         color: 'from-[#1C045A] to-[#3A1C7A]'
     },
     {
         id: 2,
-        title: 'Campaña de Reels para Gym',
-        desc: 'Producción y edición de reels promocionales para un gimnasio local.',
-        category: 'Video',
+        title: 'Comunicación Visual - Noche de Campeones 9',
+        desc: 'Desarrollo de identidad y piezas promocionales para el congreso de ritmos latinos más importante de la Patagonia. El proyecto incluyó el diseño de afiches principales, gráficas de preventa de tickets (Gold y Full Pass), piezas para sorteos y flyers personalizados para artistas y DJs.',
+        category: 'Diseño',
         images: [
-            '/projects/gym-1.jpg',
-            '/projects/gym-2.jpg',
-            '/projects/gym-3.jpg'
+            '/projects/campeones1.jpg',
+            '/projects/campeones2.jpg',
+            '/projects/campeones3.jpg',
+            '/projects/campeones4.jpg'
         ],
-        color: 'from-[#584485] to-[#7A5CA8]'
+        color: 'from-[#FF6B9D] to-[#FF8E53]'
     },
     {
         id: 3,
-        title: 'Sesión de Fotos para Restaurante',
-        desc: 'Fotografía profesional de platos y ambiente para un restaurante gourmet.',
-        category: 'Foto',
+        title: 'Identidad y Comunicación Visual - K-Pop Town.',
+        desc: 'Desarrollo integral de la línea gráfica para evento temático. Creación de piezas digitales para convocatorias de artistas (canto y danza), preventa de entradas y captación de stands comerciales, manteniendo una estética cohesiva y de alto impacto visual.',
+        category: 'Diseño',
         images: [
-            '/projects/restaurant-1.jpg',
-            '/projects/restaurant-2.jpg',
-            '/projects/restaurant-3.jpg',
-            '/projects/restaurant-4.jpg'
+            '/projects/kpop1.jpg',
+            '/projects/kpop2.jpg',
+            '/projects/kpop3.jpg',
+            '/projects/kpop4.jpg'
         ],
         color: 'from-[#9AD4EA] to-[#7AA8EE]'
     },
     {
         id: 4,
-        title: 'Estampado para Evento Corporativo',
-        desc: 'Diseño y estampado de remeras para el personal de una empresa tecnológica.',
-        category: 'Estampado',
+        title: 'Campaña de Reels de Alto Impacto - MC Gym',
+        desc: 'Producción, rodaje y edición de una serie de Reels dinámicos para redes sociales. El enfoque se centró en capturar la esencia del entrenamiento de fuerza, la técnica de los ejercicios y el ambiente de comunidad en Neuquén Capital.',
+        category: 'Video',
         images: [
-            '/projects/stamp-1.jpg',
-            '/projects/stamp-2.jpg',
-            '/projects/stamp-3.jpg'
+            '/projects/mcgym1.mp4',
+            '/projects/mcgym2.mp4',
+            '/projects/mcgym3.mp4'
         ],
-        color: 'from-[#FF6B9D] to-[#FF8E53]'
+        color: 'from-[#584485] to-[#7A5CA8]'
     }
 ];
 
@@ -77,13 +78,13 @@ function ProjectCarousel({ project, isActive, onClose }) {
         );
     };
 
-    // Auto-advance carousel
+    // Auto-advance carousel (15 segundos)
     useEffect(() => {
         if (!isActive) return;
 
         const interval = setInterval(() => {
             nextImage();
-        }, 4000);
+        }, 15000);
 
         return () => clearInterval(interval);
     }, [isActive, currentImageIndex]);
@@ -178,14 +179,29 @@ function ProjectCarousel({ project, isActive, onClose }) {
                             exit="exit"
                             className="absolute inset-0 flex items-center justify-center"
                         >
-                            <img
-                                src={project.images[currentImageIndex]}
-                                alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
-                                className="w-full h-full object-contain"
-                                onError={(e) => {
-                                    e.target.src = `https://placehold.co/800x600/1C045A/FFFFFF?text=${project.title}+${currentImageIndex + 1}`;
-                                }}
-                            />
+                            {project.images[currentImageIndex].endsWith('.mp4') ? (
+                                <video
+                                    src={project.images[currentImageIndex]}
+                                    alt={`${project.title} - Video ${currentImageIndex + 1}`}
+                                    className="w-full h-full object-contain"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                    }}
+                                />
+                            ) : (
+                                <img
+                                    src={project.images[currentImageIndex]}
+                                    alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
+                                    className="w-full h-full object-contain"
+                                    onError={(e) => {
+                                        e.target.src = `https://placehold.co/800x600/1C045A/FFFFFF?text=${project.title}+${currentImageIndex + 1}`;
+                                    }}
+                                />
+                            )}
                         </motion.div>
                     </AnimatePresence>
 
@@ -228,22 +244,6 @@ function ProjectCarousel({ project, isActive, onClose }) {
                         </span>
                     </div>
                 </div>
-
-                {/* Footer del Modal */}
-                <div className="absolute bottom-0 left-0 right-0 z-20 p-6 bg-gradient-to-t from-black/50 to-transparent">
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 className="text-white font-semibold mb-2" style={{ fontFamily: 'Akira Expanded' }}>
-                                Detalles del Proyecto
-                            </h4>
-                            <div className="space-y-1 text-[#94a3b8]" style={{ fontFamily: 'Aurora' }}>
-                                <p><span className="text-white">Categoría:</span> {project.category}</p>
-                                <p><span className="text-white">Cliente:</span> Cliente Premium</p>
-                                <p><span className="text-white">Resultados:</span> +200% engagement</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </motion.div>
         </motion.div>
     );
@@ -258,13 +258,13 @@ function ProjectCard({ project, index, onOpen }) {
 
     const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
 
-    // Auto-carrusel en hover
+    // Auto-carrusel en hover (20 segundos)
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentPreviewIndex(prev =>
                 prev === project.images.length - 1 ? 0 : prev + 1
             );
-        }, 3000);
+        }, 20000);
 
         return () => clearInterval(interval);
     }, [project.images.length]);
@@ -283,19 +283,34 @@ function ProjectCard({ project, index, onOpen }) {
                 {/* Carrusel de Preview */}
                 <div className="relative h-48 overflow-hidden">
                     <AnimatePresence mode="wait">
-                        <motion.img
-                            key={currentPreviewIndex}
-                            initial={{ opacity: 0, scale: 1.1 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.5 }}
-                            src={project.images[currentPreviewIndex]}
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                                e.target.src = `https://placehold.co/400x300/1C045A/FFFFFF?text=${project.title}`;
-                            }}
-                        />
+                        {project.images[currentPreviewIndex].endsWith('.mp4') ? (
+                            <video
+                                key={currentPreviewIndex}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover"
+                                src={project.images[currentPreviewIndex]}
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                }}
+                            />
+                        ) : (
+                            <motion.img
+                                key={currentPreviewIndex}
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.5 }}
+                                src={project.images[currentPreviewIndex]}
+                                alt={project.title}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    e.target.src = `https://placehold.co/400x300/1C045A/FFFFFF?text=${project.title}`;
+                                }}
+                            />
+                        )}
                     </AnimatePresence>
 
                     {/* Overlay de Gradient */}

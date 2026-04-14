@@ -2,14 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const brands = [
-  { name: 'Marca 1', logo: '/brands/logo1.png' },
-  { name: 'Marca 2', logo: '/brands/logo2.png' },
-  { name: 'Marca 3', logo: '/brands/logo3.png' },
-  { name: 'Marca 4', logo: '/brands/logo4.png' },
-  { name: 'Marca 5', logo: '/brands/logo5.png' },
-  { name: 'Marca 6', logo: '/brands/logo6.png' },
-  { name: 'Marca 7', logo: '/brands/logo7.png' },
-  { name: 'Marca 8', logo: '/brands/logo8.png' },
+  { name: 'Marca 1', logo: '/brands/cabedj.jpg' },
+  { name: 'Marca 2', logo: '/brands/cafe.jpg' },
+  { name: 'Marca 3', logo: '/brands/curly.jpg' },
+  { name: 'Marca 4', logo: '/brands/dcu.jpg' },
+  { name: 'Marca 5', logo: '/brands/experienciaelite.jpg' },
+  { name: 'Marca 6', logo: '/brands/giselle.jpg' },
+  { name: 'Marca 7', logo: '/brands/kpop.jpg' },
+  { name: 'Marca 8', logo: '/brands/mcgym.jpg' },
 ];
 
 export default function BrandCarousel() {
@@ -52,13 +52,13 @@ export default function BrandCarousel() {
             {[...brands, ...brands, ...brands].map((brand, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex items-center justify-center group"
+                className="flex-shrink-0 flex items-center justify-center"
               >
-                <div className="w-32 h-16 bg-white/5 rounded-xl flex items-center justify-center p-4 backdrop-blur-sm border border-white/5 hover:border-[#9AD4EA]/20 transition-all duration-300 group-hover:scale-110">
+                <div className="w-44 h-20">
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="max-w-full max-h-8 filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+                    className="w-full h-full object-contain opacity-100"
                   />
                 </div>
               </div>

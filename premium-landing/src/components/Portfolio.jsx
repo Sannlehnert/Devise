@@ -5,55 +5,44 @@ import { Link } from 'react-router-dom';
 
 const allProjects = [
   {
-    id: 1,
-    title: 'Identidad Visual para Café',
-    desc: 'Diseño de logo, papelería y packaging para una cafetería artesanal.',
-    category: 'Diseño',
-    images: [
-      '/projects/cafe-1.jpg',
-      '/projects/cafe-2.jpg',
-      '/projects/cafe-3.jpg',
-      '/projects/cafe-4.jpg'
-    ],
-    color: 'from-[#1C045A] to-[#3A1C7A]'
-  },
-  {
-    id: 2,
-    title: 'Campaña de Reels para Gym',
-    desc: 'Producción y edición de reels promocionales para un gimnasio local.',
-    category: 'Video',
-    images: [
-      '/projects/gym-1.jpg',
-      '/projects/gym-2.jpg',
-      '/projects/gym-3.jpg'
-    ],
-    color: 'from-[#584485] to-[#7A5CA8]'
-  },
-  {
-    id: 3,
-    title: 'Sesión de Fotos para Restaurante',
-    desc: 'Fotografía profesional de platos y ambiente para un restaurante gourmet.',
-    category: 'Foto',
-    images: [
-      '/projects/restaurant-1.jpg',
-      '/projects/restaurant-2.jpg',
-      '/projects/restaurant-3.jpg',
-      '/projects/restaurant-4.jpg'
-    ],
-    color: 'from-[#9AD4EA] to-[#7AA8EE]'
-  },
-  {
-    id: 4,
-    title: 'Estampado para Evento Corporativo',
-    desc: 'Diseño y estampado de remeras para el personal de una empresa tecnológica.',
-    category: 'Estampado',
-    images: [
-      '/projects/stamp-1.jpg',
-      '/projects/stamp-2.jpg',
-      '/projects/stamp-3.jpg'
-    ],
-    color: 'from-[#FF6B9D] to-[#FF8E53]'
-  }
+        id: 1,
+        title: 'Identidad Visual y Social Media - Curly Food Truck',
+        desc: 'Rediseño integral de marca, creación de mascota institucional y desarrollo de piezas gráficas para eventos masivos y redes sociales.',
+        category: 'Diseño',
+        images: [
+            '/projects/curly1.jpg',
+            '/projects/curly2.jpg',
+            '/projects/curly3.jpg',
+            '/projects/curly4.jpg'
+        ],
+        color: 'from-[#1C045A] to-[#3A1C7A]'
+    },
+    {
+        id: 2,
+        title: 'Comunicación Visual - Noche de Campeones 9',
+        desc: 'Desarrollo de identidad y piezas promocionales para el congreso de ritmos latinos más importante de la Patagonia. El proyecto incluyó el diseño de afiches principales, gráficas de preventa de tickets (Gold y Full Pass), piezas para sorteos y flyers personalizados para artistas y DJs.',
+        category: 'Diseño',
+        images: [
+            '/projects/campeones1.jpg',
+            '/projects/campeones2.jpg',
+            '/projects/campeones3.jpg',
+            '/projects/campeones4.jpg'
+        ],
+        color: 'from-[#FF6B9D] to-[#FF8E53]'
+    },
+    {
+        id: 3,
+        title: 'Identidad y Comunicación Visual - K-Pop Town.',
+        desc: 'Desarrollo integral de la línea gráfica para evento temático. Creación de piezas digitales para convocatorias de artistas (canto y danza), preventa de entradas y captación de stands comerciales, manteniendo una estética cohesiva y de alto impacto visual.',
+        category: 'Diseño',
+        images: [
+            '/projects/kpop1.jpg',
+            '/projects/kpop2.jpg',
+            '/projects/kpop3.jpg',
+            '/projects/kpop4.jpg'
+        ],
+        color: 'from-[#9AD4EA] to-[#7AA8EE]'
+    },
 ];
 
 // Solo mostrar 3 proyectos destacados
